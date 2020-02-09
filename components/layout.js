@@ -1,5 +1,6 @@
 import React from "react";
 import Nav from "../components/view/header/nav";
+import Contact from "../components/view/contact/appcontact";
 import Offer from "../components/view/offer/appoffer";
 import Footer from "../components/view/footer/appfooter";
 
@@ -10,6 +11,7 @@ const Layout = props => {
         <Nav />
         <div className="Site-content">{props.children}</div>
         <Offer />
+        <Contact />
         <Footer />
       </div>
       <style jsx>{`
