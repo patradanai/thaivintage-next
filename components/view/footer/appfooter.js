@@ -11,12 +11,12 @@ const styles = theme => ({
     backgroundColor: theme.palette.secondary.light
   },
   container: {
-    marginTop: theme.spacing(8),
-    marginBottom: theme.spacing(8),
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
     display: "flex"
   },
   iconsWrapper: {
-    height: 120
+    height: 50
   },
   icons: {
     display: "flex"
@@ -50,21 +50,29 @@ const AppFooter = props => {
     <Typography component="footer" className={classes.root}>
       <Container className={classes.container}>
         <Grid container spacing={5}>
-          <Grid item xs={6} sm={4} md={3}>
+          <Grid item xs={6}>
             <Grid
               container
               direction="column"
               justify="flex-end"
               className={classes.iconsWrapper}
-              spacing={2}
+              spacing={3}
+              style={{ alignItems: "center", marginBottom: 15 }}
             >
-              1
+              Copyright © ThaiVintage {new Date().getFullYear()}
             </Grid>
           </Grid>
-          <Grid item xs={8} sm={4} md={3}>
-            <Typography variant="h6" marked="left" gutterBottom>
-              Legal
-            </Typography>
+          <Grid item xs={6}>
+            <Grid
+              container
+              direction="column"
+              justify="flex-end"
+              className={classes.iconsWrapper}
+              spacing={3}
+              style={{ alignItems: "center", marginBottom: 15 }}
+            >
+              Magened by Patradanai
+            </Grid>
           </Grid>
         </Grid>
       </Container>
