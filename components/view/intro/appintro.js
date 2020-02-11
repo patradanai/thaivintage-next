@@ -5,6 +5,8 @@ import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import Typography from "../../tyrography";
+import Hidden from "@material-ui/core/Hidden";
+import withWidth from "@material-ui/core/withWidth";
 
 const styles = theme => ({
   root: {
@@ -12,7 +14,10 @@ const styles = theme => ({
     position: "relative",
     //overflow: "hidden",
     alignItems: "center",
-    backgroundColor: "#f09751 !important"
+    backgroundColor: "#f09751 !important",
+    [theme.breakpoints.down("sm")]: {
+      overflow: "hidden"
+    }
   },
   image: {
     pointerEvents: "none",
@@ -79,18 +84,20 @@ const AppIntro = props => {
       <section className={classes.root}>
         <Container className={classes.container}>
           <Grid container spacing={5}>
-            <Grid item xs={12} sm={6}>
-              <div className={classes.item}>
-                <img
-                  src="/images/Ala5.png"
-                  style={{
-                    marginTop: "80px",
-                    marginBottom: "80px",
-                    height: "50vh"
-                  }}
-                />
-              </div>
-            </Grid>
+            <Hidden xsDown>
+              <Grid item xs={12} sm={6}>
+                <div className={classes.item}>
+                  <img
+                    src="/images/Ala5.png"
+                    style={{
+                      marginTop: "80px",
+                      marginBottom: "80px",
+                      height: "50vh"
+                    }}
+                  />
+                </div>
+              </Grid>
+            </Hidden>
             <Grid className={classes.gridStory} item xs={12} sm={6}>
               <div className={classes.item}>
                 <div className={clsx(classes.title, "titleStory")}>
