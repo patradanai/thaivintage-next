@@ -4,16 +4,16 @@ import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import Typography from "../../tyrography";
+import Google from "../../googleMap";
 
 const styles = theme => ({
   root: {
     display: "flex",
-    backgroundColor: theme.palette.secondary.light,
     overflow: "hidden"
   },
   container: {
-    marginTop: theme.spacing(10),
-    marginBottom: theme.spacing(15),
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2),
     position: "relative",
     display: "flex",
     flexDirection: "column",
@@ -26,7 +26,7 @@ const styles = theme => ({
     padding: theme.spacing(0, 5)
   },
   title: {
-    marginBottom: theme.spacing(14)
+    marginBottom: theme.spacing(1)
   },
   number: {
     fontSize: 24,
@@ -42,33 +42,43 @@ const styles = theme => ({
   curvyLines: {
     pointerEvents: "none",
     position: "absolute",
+    top: -180,
     opacity: 0.7
   },
   button: {
     marginTop: theme.spacing(8)
+  },
+  mapSrc: {
+    width: "100%",
+    height: 400,
+    position: "relative",
+    display: "block",
+    justifyContent: "center",
+    marginBottom: theme.spacing(1),
+    marginTop: theme.spacing(1)
   }
 });
 
-const AppOffer = props => {
+const AppLocation = props => {
   const { classes } = props;
   return (
     <section className={classes.root}>
       <Container className={classes.container}>
-        <Typography
-          variant="h4"
-          marked="center"
-          className={classes.title}
-          component="h2"
-        >
-          How it works
-        </Typography>
+        <div className={classes.mapSrc}>
+          <Google
+            googleMapURL="https://maps.googleapis.com/maps/api/js?key="
+            loadingElement={<div style={{ height: `100%` }} />}
+            containerElement={<div style={{ height: `400px` }} />}
+            mapElement={<div style={{ height: `100%` }} />}
+          />
+        </div>
       </Container>
     </section>
   );
 };
 
-AppOffer.prototype = {
+AppLocation.prototype = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(AppOffer);
+export default withStyles(styles)(AppLocation);

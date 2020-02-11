@@ -46,7 +46,8 @@ const rawTheme = createMuiTheme({
     fontWeightLight: 300, // Work Sans
     fontWeightRegular: 400, // Work Sans
     fontWeightMedium: 700, // Roboto Condensed
-    fontFamilySecondary: "'Roboto Condensed', sans-serif"
+    fontFamilySecondary: "'Roboto', sans-serif",
+    fontFamilyThird: "'Cinzel', serif"
   }
 });
 
@@ -54,6 +55,13 @@ const fontHeader = {
   color: rawTheme.palette.text.primary,
   fontWeight: rawTheme.typography.fontWeightMedium,
   fontFamily: rawTheme.typography.fontFamilySecondary,
+  textTransform: "uppercase"
+};
+
+const fontTitle = {
+  color: rawTheme.palette.text.primary,
+  fontWeight: rawTheme.typography.fontWeightMedium,
+  fontFamily: rawTheme.typography.fontFamilyThird,
   textTransform: "uppercase"
 };
 
@@ -103,7 +111,8 @@ const theme = {
     },
     subtitle1: {
       ...rawTheme.typography.subtitle1,
-      fontSize: 18
+      ...fontTitle,
+      fontSize: 30
     },
     body1: {
       ...rawTheme.typography.body2,

@@ -1,12 +1,12 @@
 import React from "react";
+import clsx from "clsx";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "../../tyrography";
 import HeroLayout from "../header/herolayout";
 import Button from "../../button";
 
-const backgroundImage =
-  "https://images.unsplash.com/photo-1534854638093-bada1813ca19?auto=format&fit=crop&w=1400&q=80";
+const backgroundImage = "/images/1492020.png";
 
 const styles = theme => ({
   background: {
@@ -26,44 +26,74 @@ const styles = theme => ({
   },
   more: {
     marginTop: theme.spacing(2)
+  },
+  title: {
+    fontSize: 100,
+    fontWeight: 400,
+    marginBottom: theme.spacing(5),
+    marginTop: theme.spacing(2),
+    [theme.breakpoints.down("sm")]: {
+      marginTop: theme.spacing(1),
+      fontSize: 40
+    }
+  },
+  welcomeTitle: {
+    fontSize: 100,
+    fontWeight: 400,
+    marginTop: theme.spacing(2),
+    [theme.breakpoints.down("sm")]: {
+      marginTop: theme.spacing(10),
+      marginBottom: 0,
+      fontSize: 45
+    }
   }
 });
 
 const Hero = props => {
   const { classes } = props;
   return (
-    <HeroLayout backgroundClassName={classes.background}>
-      {/* Increase the network loading priority of the background image. */}
-      <img
-        style={{ display: "none" }}
-        src={backgroundImage}
-        alt="increase priority"
-      />
-      <Typography color="inherit" align="center" variant="h2" marked="center">
-        Upgrade your Sundays
-      </Typography>
-      <Typography
-        color="inherit"
-        align="center"
-        variant="h5"
-        className={classes.h5}
-      >
-        Enjoy secret offers up to -70% off the best luxury hotels every Sunday.
-      </Typography>
-      <Button
-        color="secondary"
-        variant="contained"
-        size="large"
-        className={classes.button}
-        component="a"
-        href="/premium-themes/onepirate/sign-up/"
-      >
-        Book A Table
-      </Button>
-      <Typography variant="body2" color="inherit" className={classes.more}>
-        Discover the experience
-      </Typography>
-    </HeroLayout>
+    <React.Fragment>
+      <HeroLayout backgroundClassName={classes.background}>
+        {/* Increase the network loading priority of the background image. */}
+        <img
+          style={{ display: "none" }}
+          src={backgroundImage}
+          alt="increase priority"
+        />
+        <div className={clsx(classes.welcomeTitle, "welcome")}>Welcome to</div>
+        <Typography
+          color="inherit"
+          align="center"
+          variant="subtitle1"
+          className={classes.title}
+        >
+          THAI VINTAGE Whitchurch
+        </Typography>
+        <Button
+          color="secondary"
+          variant="contained"
+          size="large"
+          className={classes.button}
+          component="a"
+          href="/premium-themes/onepirate/sign-up/"
+        >
+          Book A Table
+        </Button>
+        <Typography variant="body2" color="inherit" className={classes.more}>
+          Discover the experience
+        </Typography>
+      </HeroLayout>
+      <style jsx>{`
+        .welcome {
+          font-family: "Great Vibes", cursive;
+          text-align: center;
+          margin-top: 50px;
+          margin-bottom: 0px;
+          font-weight: 400;
+          color: #ee9200;
+        }
+      `}</style>
+    </React.Fragment>
   );
 };
 

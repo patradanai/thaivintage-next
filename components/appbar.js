@@ -5,7 +5,7 @@ import { withStyles } from "@material-ui/core/styles";
 const styles = theme => ({
   root: {
     color: theme.palette.common.white,
-    opacity: 0.5,
+    backgroundColor: "black",
     textAlign: "center"
   }
 });

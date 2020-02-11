@@ -6,6 +6,8 @@ import { withStyles } from "@material-ui/core/styles";
 import Appbar from "../../appbar";
 import Toolbar, { styles as toolbarStyles } from "../../toolbar";
 
+const logo = "/images/logo.png";
+
 const styles = theme => ({
   title: {
     fontSize: 24
@@ -26,12 +28,21 @@ const styles = theme => ({
     justifyContent: "flex-end"
   },
   rightLink: {
-    fontSize: 16,
+    fontSize: 14,
     color: theme.palette.common.white,
     marginLeft: theme.spacing(3)
   },
   linkSecondary: {
     color: theme.palette.secondary.main
+  },
+  logo: {
+    weight: 25,
+    height: 25,
+    backgroundImage: `url(${logo})`,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: theme.palette.warning.main
   }
 });
 
@@ -40,16 +51,7 @@ const Nav = props => {
   return (
     <Appbar position="fixed">
       <Toolbar className={classes.toolbar}>
-        <div className={classes.left} />
-        <Link
-          variant="h6"
-          underline="none"
-          color="inherit"
-          className={classes.title}
-          href="/premium-themes/onepirate/"
-        >
-          {"Thai Vintage"}
-        </Link>
+        <div className={classes.left}></div>
         <div className={classes.right}>
           <Link
             color="inherit"
@@ -58,15 +60,40 @@ const Nav = props => {
             className={classes.rightLink}
             href="/premium-themes/onepirate/sign-in/"
           >
-            {"Sign In"}
+            {"MENUS"}
           </Link>
           <Link
             variant="h6"
             underline="none"
-            className={clsx(classes.rightLink, classes.linkSecondary)}
+            className={classes.rightLink}
             href="/premium-themes/onepirate/sign-up/"
           >
-            {"Sign Up"}
+            {"LOCATION"}
+            <Link
+              color="inherit"
+              variant="h6"
+              underline="none"
+              className={classes.rightLink}
+              href="/premium-themes/onepirate/sign-in/"
+            >
+              {"GALLARY"}
+            </Link>
+            <Link
+              variant="h6"
+              underline="none"
+              className={classes.rightLink}
+              href="/premium-themes/onepirate/sign-up/"
+            >
+              {"ABOUT"}
+            </Link>
+            <Link
+              variant="h6"
+              underline="none"
+              className={classes.rightLink}
+              href="/premium-themes/onepirate/sign-up/"
+            >
+              {"CONTACT US"}
+            </Link>
           </Link>
         </div>
         <div className={classes.placeholder} />

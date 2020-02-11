@@ -3,6 +3,7 @@ import Nav from "../components/view/header/nav";
 import Contact from "../components/view/contact/appcontact";
 import Offer from "../components/view/offer/appoffer";
 import Footer from "../components/view/footer/appfooter";
+import Location from "../components/view/location/applocation";
 
 const Layout = props => {
   return (
@@ -12,6 +13,7 @@ const Layout = props => {
         <div className="Site-content">{props.children}</div>
         <Offer />
         <Contact />
+        <Location />
         <Footer />
       </div>
       <style jsx>{`

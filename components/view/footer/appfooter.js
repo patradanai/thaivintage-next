@@ -49,7 +49,7 @@ const AppFooter = props => {
   return (
     <Typography component="footer" className={classes.root}>
       <Container className={classes.container}>
-        <Grid container spacing={5}>
+        <Grid container spacing={3}>
           <Grid item xs={6}>
             <Grid
               container
