@@ -5,11 +5,15 @@ import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import Typography from "../../tyrography";
 
+const background = "/images/1491928.png";
+
 const styles = theme => ({
   root: {
     display: "flex",
     backgroundColor: theme.palette.secondary.light,
-    overflow: "hidden"
+    overflow: "hidden",
+    alignItems: "center",
+    position: "relative"
   },
   container: {
     marginTop: theme.spacing(10),
@@ -46,6 +50,16 @@ const styles = theme => ({
   },
   button: {
     marginTop: theme.spacing(8)
+  },
+  backgroundoffer: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    backgroundImage: `url(${background})`,
+    backgroundSize: "cover",
+    opacity: 0.8
   }
 });
 
@@ -53,16 +67,8 @@ const AppOffer = props => {
   const { classes } = props;
   return (
     <section className={classes.root}>
-      <Container className={classes.container}>
-        <Typography
-          variant="h4"
-          marked="center"
-          className={classes.title}
-          component="h2"
-        >
-          How it works
-        </Typography>
-      </Container>
+      <div className={classes.backgroundoffer} />
+      <Container className={classes.container}></Container>
     </section>
   );
 };

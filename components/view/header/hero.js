@@ -15,7 +15,22 @@ const styles = theme => ({
     backgroundPosition: "center"
   },
   button: {
-    minWidth: 200
+    color: "#000",
+    minWidth: 300,
+    marginLeft: 25,
+    marginRight: 25,
+    textAlign: "center",
+    backgroundColor: "#ff671f",
+    border: "1px solid #ff671f",
+    "&:hover": {
+      border: "1px solid #ff671f",
+      backgroundColor: "#fff"
+    },
+    [theme.breakpoints.down("sm")]: {
+      marginBottom: theme.spacing(1),
+      width: 80,
+      height: 50
+    }
   },
   h5: {
     marginBottom: theme.spacing(4),
@@ -69,16 +84,28 @@ const Hero = props => {
         >
           THAI VINTAGE Whitchurch
         </Typography>
-        <Button
-          color="secondary"
-          variant="contained"
-          size="large"
-          className={classes.button}
-          component="a"
-          href="/premium-themes/onepirate/sign-up/"
-        >
-          Book A Table
-        </Button>
+        <div style={{ display: "inline" }}>
+          <Button
+            color="secondary"
+            variant="contained"
+            size="large"
+            className={classes.button}
+            component="a"
+            href="/premium-themes/onepirate/sign-up/"
+          >
+            Book A Table
+          </Button>
+          <Button
+            color="secondary"
+            variant="contained"
+            size="large"
+            className={classes.button}
+            component="a"
+            href="/premium-themes/onepirate/sign-up/"
+          >
+            Take Away
+          </Button>
+        </div>
         <Typography variant="body2" color="inherit" className={classes.more}>
           Discover the experience
         </Typography>

@@ -4,9 +4,10 @@ import { withStyles } from "@material-ui/core/styles";
 
 export const styles = theme => ({
   root: {
+    display: "flex",
     height: 64,
     [theme.breakpoints.up("sm")]: {
-      height: 70
+      height: 100
     }
   }
 });

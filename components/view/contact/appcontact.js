@@ -35,11 +35,15 @@ const styles = theme => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: theme.palette.warning.main,
-    marginRight: theme.spacing(1),
+    marginRight: theme.spacing(3),
     "&:hover": {
-      backgroundColor: theme.palette.warning.dark
+      opacity: 0.5
     }
+  },
+  Text: {
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2),
+    lineHeight: 3
   }
 });
 
@@ -55,21 +59,31 @@ const Contact = props => {
     <section className={classes.root}>
       <Container className={classes.container}>
         <Grid container spacing={5}>
-          <Grid item xs={4}>
+          <Grid item xs={12} sm={4}>
             <div className={classes.item}>
-              <Typography variant="h5">OPENING HOURS</Typography>
-              <Typography variant="body">
-                Thuesday to Monday : 12:00 - 23:00
+              <Typography variant="h4" align="center" component="h2">
+                OPENING HOURS
+              </Typography>
+              <Typography variant="h5" align="center" className={classes.Text}>
+                Open 6 days <br />
+                Lunch: Tuesday- Sunday <br />
+                12.00 - 2.30 pm <br />
+                Dinner: Tuesday- Sunday <br />
+                5.30pm - 10.00 pm
               </Typography>
             </div>
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={12} sm={4}>
             <div className={classes.item}>
-              <Typography variant="h5">THAI VINTAGE</Typography>
-              <Typography variant="body">Old Mill,</Typography>
-              <Typography variant="body">Park Avenue,</Typography>
-              <Typography variant="body">Whitchurch,</Typography>
-              <Typography variant="body">SY13 1SH, London</Typography>
+              <Typography variant="h4" align="center" component="h2">
+                THAI VINTAGE WHITCHURCH
+              </Typography>
+              <Typography variant="h5" align="center" className={classes.Text}>
+                Old Mill, <br />
+                Park Avenue, <br />
+                Whitchurch, <br />
+                SY13 1SH, London
+              </Typography>
               <div className={classes.images}>
                 {images.map(data => (
                   <div
@@ -84,11 +98,18 @@ const Contact = props => {
               </div>
             </div>
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={12} sm={4}>
             <div className={classes.item}>
-              <Typography variant="h5">CONTACT US</Typography>
-              <Typography variant="body">+44 1948 661800</Typography>
-              <Typography variant="body">Email</Typography>
+              <Typography variant="h4" align="center" component="h2">
+                CONTACT US
+              </Typography>
+              <Typography variant="h5" align="center" className={classes.Text}>
+                +44 1948 661800
+                <br />
+                OR
+                <br />
+                SEARCH FOR A BOOKING ONLINE
+              </Typography>
             </div>
           </Grid>
         </Grid>

@@ -8,7 +8,7 @@ import Typography from "../../tyrography";
 const styles = theme => ({
   root: {
     display: "flex",
-    backgroundColor: theme.palette.secondary.light
+    backgroundColor: "#f09751"
   },
   container: {
     marginTop: theme.spacing(1),

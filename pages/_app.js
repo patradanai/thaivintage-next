@@ -20,10 +20,10 @@ export default class MyApp extends App {
     return (
       <React.Fragment>
         <Head>
-          <title>My page</title>
+          <title>ThaiVintage Whitchurch</title>
           <meta
             name="viewport"
-            content="minimum-scale=1, initial-scale=1, width=device-width"
+            content="width=device-width, initial-scale=1, user-scalable=0, maximum-scale=1, minimum-scale=1"
           />
         </Head>
         <ThemeProvider theme={theme}>

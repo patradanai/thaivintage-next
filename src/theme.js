@@ -97,12 +97,14 @@ const theme = {
     h4: {
       ...rawTheme.typography.h4,
       ...fontHeader,
-      fontSize: 36
+      fontSize: 32,
+      fontFamily: "'Cinzel', serif"
     },
     h5: {
       ...rawTheme.typography.h5,
       fontSize: 20,
-      fontWeight: rawTheme.typography.fontWeightLight
+      fontWeight: rawTheme.typography.fontWeightLight,
+      fontFamily: "'Cinzel', serif"
     },
     h6: {
       ...rawTheme.typography.h6,
