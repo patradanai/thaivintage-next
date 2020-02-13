@@ -35,7 +35,7 @@ const styles = theme => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    marginRight: theme.spacing(3),
+    marginRight: theme.spacing(2),
     "&:hover": {
       opacity: 0.5
     }
@@ -82,7 +82,7 @@ const Contact = props => {
                 Old Mill, <br />
                 Park Avenue, <br />
                 Whitchurch, <br />
-                SY13 1SH, London
+                SY13 1SH
               </Typography>
               <div className={classes.images}>
                 {images.map(data => (

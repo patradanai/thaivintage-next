@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Link from "@material-ui/core/Link";
+import Link from "next/link";
 import clsx from "clsx";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
@@ -11,6 +11,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import Hidden from "@material-ui/core/Hidden";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
+import Container from "@material-ui/core/Container";
 
 const logo = "/images/logo.png";
 
@@ -20,6 +21,8 @@ const styles = theme => ({
   },
   placeholder: toolbarStyles(theme).root,
   toolbar: {
+    paddingLeft: 0,
+    paddingRight: 0,
     justifyContent: "space-between"
   },
   left: {
@@ -29,12 +32,18 @@ const styles = theme => ({
     color: theme.palette.common.white
   },
   right: {
-    flex: 1
+    flex: 1,
+    display: "flex",
+    justifyContent: "flex-end",
+    [theme.breakpoints.down("sm")]: {
+      justifyContent: "center"
+    }
   },
   leftLink: {
     fontSize: 14,
     color: theme.palette.common.black,
-    marginLeft: theme.spacing(3)
+    marginLeft: theme.spacing(2),
+    padding: 5
   },
   rightLink: {
     fontSize: 14,
@@ -42,6 +51,7 @@ const styles = theme => ({
     marginRight: theme.spacing(3),
     backgroundColor: "#fff",
     border: "1px solid #ff671f",
+    padding: 5,
     [theme.breakpoints.down("sm")]: {
       fontSize: 10,
       marginRight: theme.spacing(1)
@@ -77,86 +87,103 @@ const Nav = props => {
 
   return (
     <Appbar position="fixed">
-      <Toolbar className={classes.toolbar}>
-        <Hidden smDown>
-          <div className={classes.left}>
-            <Link
-              color="inherit"
-              variant="h6"
-              underline="none"
-              className={classes.leftLink}
-              href="/premium-themes/onepirate/sign-in/"
+      <Container>
+        <Toolbar className={classes.toolbar}>
+          <Hidden smDown>
+            <div className={classes.left}>
+              <Link href="/menu">
+                <Button
+                  color="primary"
+                  size="small"
+                  className={classes.leftLink}
+                >
+                  {"MENUS"}
+                </Button>
+              </Link>
+              <Link href="/location">
+                <Button
+                  color="primary"
+                  size="small"
+                  className={classes.leftLink}
+                >
+                  {"LOCATION"}
+                </Button>
+              </Link>
+              <Link href="/gallery">
+                <Button
+                  color="primary"
+                  size="small"
+                  className={classes.leftLink}
+                >
+                  {"GALLERY"}
+                </Button>
+              </Link>
+              <Link href="/about">
+                <Button
+                  color="primary"
+                  size="small"
+                  className={classes.leftLink}
+                >
+                  {"ABOUT"}
+                </Button>
+              </Link>
+              <Link href="/contact">
+                <Button
+                  color="primary"
+                  size="small"
+                  className={classes.leftLink}
+                >
+                  {"CONTACT US"}
+                </Button>
+              </Link>
+            </div>
+          </Hidden>
+          <Link href="/">
+            <img src={logo} className={classes.imageSrc} />
+          </Link>
+          <div className={classes.right}>
+            <Button
+              variant="contained"
+              size="small"
+              className={classes.rightLink}
             >
-              {"MENUS"}
-            </Link>
-            <Link
-              variant="h6"
-              underline="none"
-              className={classes.leftLink}
-              href="/premium-themes/onepirate/sign-up/"
+              Take away
+            </Button>
+            <Button
+              variant="contained"
+              size="small"
+              className={classes.rightLink}
             >
-              {"LOCATION"}
-            </Link>
-            <Link
-              color="inherit"
-              variant="h6"
-              underline="none"
-              className={classes.leftLink}
-              href="/premium-themes/onepirate/sign-in/"
-            >
-              {"GALLERY"}
-            </Link>
-            <Link
-              variant="h6"
-              underline="none"
-              className={classes.leftLink}
-              href="/premium-themes/onepirate/sign-up/"
-            >
-              {"ABOUT"}
-            </Link>
-            <Link
-              variant="h6"
-              underline="none"
-              className={classes.leftLink}
-              href="/premium-themes/onepirate/sign-up/"
-            >
-              {"CONTACT US"}
-            </Link>
+              Book a Table
+            </Button>
           </div>
-        </Hidden>
-        <img src={logo} className={classes.imageSrc} />
-        <div className={classes.right}>
-          <Button variant="contained" className={classes.rightLink}>
-            Take away
-          </Button>
-          <Button variant="contained" className={classes.rightLink}>
-            Book a Table
-          </Button>
-        </div>
-        <Hidden smUp>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="secondary"
-            aria-label="menu"
-            onClick={handleClick}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Menu
-            id="simple-menu"
-            anchorEl={anchorEl}
-            keepMounted
-            open={Boolean(anchorEl)}
-            onClose={handleClose}
-          >
-            <MenuItem onClick={handleClose}>Profile</MenuItem>
-            <MenuItem onClick={handleClose}>My account</MenuItem>
-            <MenuItem onClick={handleClose}>Logout</MenuItem>
-          </Menu>
-        </Hidden>
-        <div className={classes.placeholder} />
-      </Toolbar>
+          <Hidden smUp>
+            <IconButton
+              edge="start"
+              className={classes.menuButton}
+              color="secondary"
+              aria-label="menu"
+              onClick={handleClick}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              id="simple-menu"
+              anchorEl={anchorEl}
+              keepMounted
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+            >
+              <MenuItem onClick={handleClose}>MENUS</MenuItem>
+              <MenuItem onClick={handleClose}>LOCATION</MenuItem>
+              <MenuItem onClick={handleClose}>GALLERY</MenuItem>
+              <MenuItem onClick={handleClose}>ABOUT</MenuItem>
+              <MenuItem onClick={handleClose}>CONTACT US</MenuItem>
+            </Menu>
+          </Hidden>
+          <div className={classes.placeholder} />
+        </Toolbar>
+      </Container>
     </Appbar>
   );
 };

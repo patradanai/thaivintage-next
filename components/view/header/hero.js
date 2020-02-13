@@ -49,7 +49,7 @@ const styles = theme => ({
     marginTop: theme.spacing(2),
     [theme.breakpoints.down("sm")]: {
       marginTop: theme.spacing(1),
-      fontSize: 40
+      fontSize: 30
     }
   },
   welcomeTitle: {
@@ -59,7 +59,7 @@ const styles = theme => ({
     [theme.breakpoints.down("sm")]: {
       marginTop: theme.spacing(10),
       marginBottom: 0,
-      fontSize: 45
+      fontSize: 30
     }
   }
 });
