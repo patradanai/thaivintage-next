@@ -92,7 +92,7 @@ const Contact = props => {
                       backgroundImage: `url(${data.url})`,
                       backgroundSize: 48
                     }}
-                    key={data.titl}
+                    key={data.title}
                   ></div>
                 ))}
               </div>

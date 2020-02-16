@@ -5,6 +5,8 @@ import { withStyles } from "@material-ui/core/styles";
 import Typography from "../../tyrography";
 import HeroLayout from "../header/herolayout";
 import Button from "../../button";
+import ModalRev from "../../reservation/modalrev";
+import { Grid } from "@material-ui/core";
 
 const backgroundImage = "/images/1492020.png";
 
@@ -16,6 +18,7 @@ const styles = theme => ({
   },
   button: {
     color: "#000",
+    fontSize: 15,
     minWidth: 300,
     marginLeft: 25,
     marginRight: 25,
@@ -84,27 +87,27 @@ const Hero = props => {
         >
           THAI VINTAGE Whitchurch
         </Typography>
-        <div style={{ display: "inline" }}>
-          <Button
-            color="secondary"
-            variant="contained"
-            size="large"
-            className={classes.button}
-            component="a"
-            href="/premium-themes/onepirate/sign-up/"
-          >
-            Book A Table
-          </Button>
-          <Button
-            color="secondary"
-            variant="contained"
-            size="large"
-            className={classes.button}
-            component="a"
-            href="/premium-themes/onepirate/sign-up/"
-          >
-            Take Away
-          </Button>
+        <div style={{ display: "flex", justifyContent: "space-around" }}>
+          <Grid container>
+            <Grid item xs={12} sm={6}>
+              <ModalRev
+                name="Book A Table"
+                class={classes.button}
+                other='size="large" color="secondary" variant="contained" component="a"'
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Button
+                color="secondary"
+                variant="contained"
+                size="large"
+                className={classes.button}
+                component="a"
+              >
+                Take Away
+              </Button>
+            </Grid>
+          </Grid>
         </div>
         <Typography variant="body2" color="inherit" className={classes.more}>
           Discover the experience

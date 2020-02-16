@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Link from "next/link";
-import clsx from "clsx";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Appbar from "../../appbar";
@@ -12,6 +11,7 @@ import Hidden from "@material-ui/core/Hidden";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import Container from "@material-ui/core/Container";
+import ModalRev from "../../reservation/modalrev";
 
 const logo = "/images/logo.png";
 
@@ -77,6 +77,7 @@ const styles = theme => ({
 const Nav = props => {
   const { classes } = props;
   const [anchorEl, setAnchorEl] = React.useState(null);
+
   const handleClick = event => {
     setAnchorEl(event.currentTarget);
   };
@@ -127,7 +128,7 @@ const Nav = props => {
                   {"ABOUT"}
                 </Button>
               </Link>
-              <Link href="/contact">
+              <Link href="#contact">
                 <Button
                   color="primary"
                   size="small"
@@ -142,19 +143,13 @@ const Nav = props => {
             <img src={logo} className={classes.imageSrc} />
           </Link>
           <div className={classes.right}>
+            <ModalRev name="Book a Table" class={classes.rightLink} />
             <Button
               variant="contained"
               size="small"
               className={classes.rightLink}
             >
-              Take away
-            </Button>
-            <Button
-              variant="contained"
-              size="small"
-              className={classes.rightLink}
-            >
-              Book a Table
+              Take AWAY
             </Button>
           </div>
           <Hidden smUp>

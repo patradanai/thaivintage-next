@@ -6,7 +6,6 @@ import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import Typography from "../../tyrography";
 import Hidden from "@material-ui/core/Hidden";
-import withWidth from "@material-ui/core/withWidth";
 
 const styles = theme => ({
   root: {

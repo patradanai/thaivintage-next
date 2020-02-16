@@ -18,7 +18,7 @@ const styles = theme => ({
   container: {
     marginTop: theme.spacing(10),
     marginBottom: theme.spacing(15),
-    position: "relative",
+    position: "abolute",
     display: "flex",
     flexDirection: "column",
     alignItems: "center"
@@ -59,6 +59,7 @@ const styles = theme => ({
     bottom: 0,
     backgroundImage: `url(${background})`,
     backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
     opacity: 0.8
   }
 });
@@ -67,8 +68,9 @@ const AppOffer = props => {
   const { classes } = props;
   return (
     <section className={classes.root}>
-      <div className={classes.backgroundoffer} />
-      <Container className={classes.container}></Container>
+      <Container className={classes.container}>
+        <div className={classes.backgroundoffer} />
+      </Container>
     </section>
   );
 };

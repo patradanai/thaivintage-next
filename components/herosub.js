@@ -3,23 +3,22 @@ import PropTypes from "prop-types";
 import clsx from "clsx";
 import { withStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import Typography from "../components/tyrography";
 
-const backgroundImage = "/images/16.png";
+const backgroundImage = "/images/1491917.png";
 
 const styles = theme => ({
   root: {
     color: theme.palette.common.white,
-    backgroundColor: "#7fc7d9", // Average color of the background image.
-    backgroundPosition: "center",
     position: "relative",
     display: "flex",
     alignItems: "center",
+    minHeight: 200,
     [theme.breakpoints.up("sm")]: {
-      minHeight: 400,
+      minHeight: 300,
       maxHeight: 1300
     }
   },
-  backdrop: {},
   container: {
     marginTop: theme.spacing(3),
     marginBottom: theme.spacing(1),
@@ -28,33 +27,55 @@ const styles = theme => ({
     alignItems: "center"
   },
   backgroundhero: {
-    backgroundImage: `url(${backgroundImage})`,
+    position: "absolute",
     left: 0,
     right: 0,
     top: 0,
     bottom: 0,
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
-    zIndex: 1
+    zIndex: -1
+  },
+  imagebackground: {
+    backgroundImage: `url(${backgroundImage})`,
+    backgroundColor: "#7fc7d9", // Average color of the background image.
+    backgroundPosition: "center"
   },
   title: {
-    fontSize: 100,
+    fontSize: 50,
     fontWeight: 400,
     marginBottom: theme.spacing(5),
-    marginTop: theme.spacing(2),
+    marginTop: theme.spacing(15),
+    color: theme.palette.common.black,
     [theme.breakpoints.down("sm")]: {
-      marginTop: theme.spacing(1),
+      marginTop: theme.spacing(10),
       fontSize: 30
     }
+  },
+  backdrop: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    backgroundColor: theme.palette.common.black,
+    opacity: 0.1,
+    zIndex: -1
   }
 });
 
 const HeroSub = props => {
   const { classes } = props;
   return (
-    <section className={clsx(classes.root, classes.backgroundhero)}>
+    <section className={classes.root}>
       <img src={backgroundImage} style={{ display: "None" }} />
-      <Container className={classes.container}></Container>
+      <div className={classes.backdrop} />
+      <div className={clsx(classes.backgroundhero, classes.imagebackground)} />
+      <Container className={classes.container}>
+        <Typography align="center" variant="h2" className={classes.title}>
+          {props.title}
+        </Typography>
+      </Container>
     </section>
   );
 };

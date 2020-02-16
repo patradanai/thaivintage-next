@@ -81,32 +81,38 @@ const AppCatagory = props => {
     {
       url: "/images/Ala5.png",
       title: "A LA CARTE MENU",
-      width: "40%"
+      width: "40%",
+      link: "/menus/ALACARTE.pdf"
     },
     {
       url: "/images/Drink2.png",
       title: "Drinking",
-      width: "20%"
+      width: "20%",
+      link: "/menus/DRINKING.pdf"
     },
     {
       url: "/images/set3.png",
       title: "LUNCH&SET MENU",
-      width: "40%"
+      width: "40%",
+      link: "/menus/SETMENU.pdf"
     },
     {
       url: "/images/kidset3.png",
       title: "KIDS MENU",
-      width: "38%"
+      width: "38%",
+      link: "/menus/KIDSMENU.pdf"
     },
     {
       url: "/images/dessert1.png",
       title: "DESSERT MENU",
-      width: "38%"
+      width: "38%",
+      link: "/menus/DESSERTS&COFFEE.pdf"
     },
     {
       url: "/images/tea1.png",
       title: "COFFEE AND TEA",
-      width: "24%"
+      width: "24%",
+      link: "/menus/DESSERTS&COFFEE.pdf"
     }
   ];
   return (
@@ -129,7 +135,10 @@ const AppCatagory = props => {
                 backgroundImage: `url(${payload.url})`
               }}
             />
-            <div className={classes.imageBackdrop} />
+
+            <a href={payload.link}>
+              <div className={classes.imageBackdrop} />
+            </a>
             <div className={classes.imageButton}>
               <Typography
                 component="h3"
