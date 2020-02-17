@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
+import Router from "next/router";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Appbar from "../../appbar";
@@ -119,7 +120,7 @@ const Nav = props => {
                   {"GALLERY"}
                 </Button>
               </Link>
-              <Link href="/about">
+              <Link href="">
                 <Button
                   color="primary"
                   size="small"
@@ -169,11 +170,43 @@ const Nav = props => {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleClose}>MENUS</MenuItem>
-              <MenuItem onClick={handleClose}>LOCATION</MenuItem>
-              <MenuItem onClick={handleClose}>GALLERY</MenuItem>
+              <MenuItem onClick={handleClose}>
+                <a
+                  onClick={() => {
+                    Router.push("/menu");
+                  }}
+                >
+                  MENUS
+                </a>
+              </MenuItem>
+              <MenuItem onClick={handleClose}>
+                <a
+                  onClick={() => {
+                    Router.push("/location");
+                  }}
+                >
+                  LOCATION
+                </a>
+              </MenuItem>
+              <MenuItem onClick={handleClose}>
+                <a
+                  onClick={() => {
+                    Router.push("/gallery");
+                  }}
+                >
+                  GALLERY
+                </a>
+              </MenuItem>
               <MenuItem onClick={handleClose}>ABOUT</MenuItem>
-              <MenuItem onClick={handleClose}>CONTACT US</MenuItem>
+              <MenuItem onClick={handleClose}>
+                <a
+                  onClick={() => {
+                    Router.push("/contact");
+                  }}
+                >
+                  CONTACT US
+                </a>
+              </MenuItem>
             </Menu>
           </Hidden>
           <div className={classes.placeholder} />

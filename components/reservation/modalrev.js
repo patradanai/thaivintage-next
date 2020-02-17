@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
@@ -67,7 +66,8 @@ export default function FormDialog(props) {
     "21:30"
   ];
 
-  const handleSavetoDB = async () => {
+  const handleSavetoDB = async event => {
+    event.preventDefault();
     let firebase = await loadDBFirebase();
     let refDoc = firebase.firestore().collection("reservation");
 
@@ -85,7 +85,7 @@ export default function FormDialog(props) {
       })
       .then(ref => {
         console.log("Document written with ID: ", ref.id);
-        handleClose();
+        handleComplete();
       })
       .catch(function(error) {
         console.error("Error adding document: ", error);
@@ -105,8 +105,7 @@ export default function FormDialog(props) {
     setOpen(true);
   };
 
-  const handleComplete = event => {
-    event.preventDefault();
+  const handleComplete = () => {
     setComplete(true);
   };
   const handleClose = () => {
@@ -121,7 +120,6 @@ export default function FormDialog(props) {
         variant="outlined"
         color="primary"
         onClick={handleClickOpen}
-        {...props.other}
       >
         {props.name}
       </Button>
@@ -142,11 +140,12 @@ export default function FormDialog(props) {
                 To subscribe to this website, please enter your email address
                 here. We will send updates occasionally.
               </DialogContentText>
-              <form className={classes.root}>
+              <form className={classes.root} onSubmit={handleSavetoDB}>
                 <Grid container spacing={0}>
                   <Grid item sm={6} xs={12} className={classes.item}>
                     <TextField
                       autoFocus
+                      required
                       id="outlined-required"
                       label="Name"
                       type="text"
@@ -173,6 +172,7 @@ export default function FormDialog(props) {
                   </Grid>
                   <Grid item sm={6} xs={12} className={classes.item}>
                     <TextField
+                      required
                       id="email"
                       label="Email Address"
                       type="email"
@@ -193,10 +193,11 @@ export default function FormDialog(props) {
                   </Grid>
                   <Grid item sm={6} xs={12} className={classes.item}>
                     <TextField
+                      required
                       id="contact"
                       label="Contact Number"
                       variant="outlined"
-                      type="text"
+                      type="number"
                       value={contact}
                       onChange={event => setContact(event.target.value)}
                       InputLabelProps={{
@@ -216,6 +217,7 @@ export default function FormDialog(props) {
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
                       <KeyboardDatePicker
                         disableToolbar
+                        required
                         variant="inline"
                         format="MM/dd/yyyy"
                         margin="normal"
@@ -233,13 +235,14 @@ export default function FormDialog(props) {
                     <TextField
                       id="outlined-select-currency"
                       select
+                      required
                       label="Time"
                       value={selectedTime}
                       onChange={handleTimeChange}
                       variant="outlined"
                     >
                       {times.map((option, index) => (
-                        <MenuItem key={index} value={option}>
+                        <MenuItem value={option} key={index}>
                           {option}
                         </MenuItem>
                       ))}
@@ -247,6 +250,7 @@ export default function FormDialog(props) {
                   </Grid>
                   <Grid item sm={4} xs={12} className={classes.item}>
                     <TextField
+                      required
                       id="outlined-number"
                       label="Number of Guest :"
                       type="number"
@@ -275,16 +279,16 @@ export default function FormDialog(props) {
                     />
                   </Grid>
                 </Grid>
+                <div style={{ display: "flex", justifyContent: "flex-end" }}>
+                  <Button type="submit" color="primary">
+                    Booking
+                  </Button>
+                  <Button onClick={handleClose} color="primary">
+                    Cancel
+                  </Button>
+                </div>
               </form>
             </DialogContent>
-            <DialogActions>
-              <Button onClick={handleClose} color="primary">
-                Cancel
-              </Button>
-              <Button onClick={handleComplete} color="primary">
-                Booking
-              </Button>
-            </DialogActions>
           </div>
         )}
       </Dialog>

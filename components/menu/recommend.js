@@ -28,7 +28,7 @@ const styles = theme => ({
     display: "block",
     [theme.breakpoints.down("sm")]: {
       textAlign: "center",
-      fontSize: 50
+      fontSize: 40
     }
   },
   menu: {
@@ -44,6 +44,7 @@ const styles = theme => ({
   },
   button: {
     height: 60,
+    width: "100%",
     border: "1px solid #000",
     [theme.breakpoints.down("sm")]: {
       marginRight: theme.spacing(1)
@@ -122,10 +123,9 @@ const RecommendMenu = props => {
           >
             <Grid container spacing={2}>
               {listMenu.map((payload, index) => (
-                <Grid item xs className={classes.item}>
+                <Grid item xs className={classes.item} key={index}>
                   <Button
                     variant="outlined"
-                    fullWidth
                     className={classes.button}
                     href={payload.link}
                     key={index}

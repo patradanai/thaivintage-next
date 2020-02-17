@@ -83,7 +83,7 @@ const AppIntro = props => {
       <section className={classes.root}>
         <Container className={classes.container}>
           <Grid container spacing={5}>
-            <Hidden xsDown>
+            <Hidden smUp>
               <Grid item xs={12} sm={6}>
                 <div className={classes.item}>
                   <img

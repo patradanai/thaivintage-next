@@ -10,6 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { loadDBFirebase } from "../lib/firebase";
+import Router from "next/router";
 
 function Copyright() {
   return (
@@ -61,9 +62,9 @@ const SignIn = () => {
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then(response => {
-        console.log(response);
         setToken(response);
       })
+      .then(() => Router.push("/dashboard"))
       .catch(error => {
         setMessage(error.message);
         console.log(error);
@@ -84,7 +85,7 @@ const SignIn = () => {
           Sign in
         </Typography>
         <h1>{(token, message)}</h1>
-        <div className={classes.form}>
+        <form className={classes.form} onSubmit={handleLogin}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -125,11 +126,10 @@ const SignIn = () => {
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={handleLogin}
           >
             Sign In
           </Button>
-        </div>
+        </form>
       </div>
       <Box mt={8}>
         <Copyright />

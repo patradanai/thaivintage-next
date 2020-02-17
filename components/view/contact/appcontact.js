@@ -51,9 +51,14 @@ const Contact = props => {
   const { classes } = props;
 
   const images = [
-    { url: "/images/facebook.png", title: "facebook" },
-    { url: "/images/instagram.png", title: "instagram" },
-    { url: "/images/twitter.png", title: "twitter" }
+    {
+      url: "/images/facebook.png",
+      title: "facebook",
+      link:
+        "https://www.facebook.com/Thai-Vintage-Whitchurch-Restaurant-100411281542289"
+    },
+    { url: "/images/instagram.png", title: "instagram", link: "" },
+    { url: "/images/twitter.png", title: "twitter", link: "" }
   ];
   return (
     <section className={classes.root}>
@@ -85,15 +90,17 @@ const Contact = props => {
                 SY13 1SH
               </Typography>
               <div className={classes.images}>
-                {images.map(data => (
-                  <div
-                    className={classes.imageSrc}
-                    style={{
-                      backgroundImage: `url(${data.url})`,
-                      backgroundSize: 48
-                    }}
-                    key={data.title}
-                  ></div>
+                {images.map((data, index) => (
+                  <a href={data.link} key={index}>
+                    <div
+                      className={classes.imageSrc}
+                      style={{
+                        backgroundImage: `url(${data.url})`,
+                        backgroundSize: 48
+                      }}
+                      key={data.title}
+                    ></div>
+                  </a>
                 ))}
               </div>
             </div>
