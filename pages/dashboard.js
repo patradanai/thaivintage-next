@@ -1,7 +1,8 @@
 import React from "react";
+import Dashboard from "../components/dashboard/dashboard";
 
-const Dashboard = () => {
-  return <h1>MOnitoring Reservation</h1>;
+const DashboardPage = () => {
+  return <Dashboard />;
 };
 
-export default Dashboard;
+export default DashboardPage;

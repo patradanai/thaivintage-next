@@ -66,7 +66,7 @@ const AppLocation = props => {
       <Container className={classes.container}>
         <div className={classes.mapSrc}>
           <Google
-            googleMapURL="https://maps.googleapis.com/maps/api/js?key="
+            googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6ZlEgybYqVlX6oFQZ5FulqUlMMnyMqjA"
             loadingElement={<div style={{ height: `100%` }} />}
             containerElement={<div style={{ height: `400px` }} />}
             mapElement={<div style={{ height: `100%` }} />}
