@@ -18,22 +18,4 @@ const Home = props => {
   );
 };
 
-// Home.getInitialProps = async () => {
-//   let firebase = await loadDBFirebase();
-//   let db = firebase.firestore();
-//   let result = db
-//     .collection("reservation")
-//     .limit(10)
-//     .get()
-//     .then(snapshot => {
-//       console.log(snapshot);
-//       let data = [];
-//       snapshot.forEach(doc => {
-//         console.log(doc.id, "=>", doc.data());
-//       });
-//     })
-//     .catch(err => {});
-//   return { data: result };
-// };
-
 export default Home;

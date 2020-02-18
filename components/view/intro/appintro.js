@@ -83,15 +83,14 @@ const AppIntro = props => {
       <section className={classes.root}>
         <Container className={classes.container}>
           <Grid container spacing={5}>
-            <Hidden smUp>
-              <Grid item xs={12} sm={6}>
+            <Hidden xsUp>
+              <Grid item xs={12} lg={6}>
                 <div className={classes.item}>
                   <img
                     src="/images/Ala5.png"
                     style={{
                       marginTop: "80px",
-                      marginBottom: "80px",
-                      height: "50vh"
+                      marginBottom: "80px"
                     }}
                   />
                 </div>
