@@ -83,19 +83,17 @@ const AppIntro = props => {
       <section className={classes.root}>
         <Container className={classes.container}>
           <Grid container spacing={5}>
-            <Hidden xsUp>
-              <Grid item xs={12} lg={6}>
-                <div className={classes.item}>
-                  <img
-                    src="/images/Ala5.png"
-                    style={{
-                      marginTop: "80px",
-                      marginBottom: "80px"
-                    }}
-                  />
-                </div>
-              </Grid>
-            </Hidden>
+            <Grid item xs={12} md={6}>
+              <div className={classes.item}>
+                <img
+                  src="/images/Ala5.png"
+                  style={{
+                    marginTop: "80px",
+                    marginBottom: "80px"
+                  }}
+                />
+              </div>
+            </Grid>
             <Grid className={classes.gridStory} item xs={12} sm={6}>
               <div className={classes.item}>
                 <div className={clsx(classes.title, "titleStory")}>

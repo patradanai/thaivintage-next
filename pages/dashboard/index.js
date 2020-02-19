@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import { loadDBFirebase } from "../../lib/firebase";
 import Reserve from "../../components/dashboard/reservation";
 import moment from "moment";
-import { da } from "date-fns/locale";
 export const { Provider, Consumer } = createContext();
 
 const DashboardPage = props => {
@@ -19,17 +18,17 @@ const DashboardPage = props => {
       let updateList = [];
       snapshot.forEach(data => {
         updateList.push({
-          "Reserve No": data.id,
-          "Guest Name": data.data().name,
-          "E-mail": data.data().email,
-          "Contact No": data.data().contact,
-          "Number of Guest": data.data().people,
-          "Reserve Date": moment(data.data().date.seconds, "X").format(
+          id: data.id,
+          name: data.data().name,
+          email: data.data().email,
+          contact: data.data().contact,
+          guestno: data.data().people,
+          reserveDate: moment(data.data().date.seconds, "X").format(
             "YYYY-MM-DD"
           ),
-          "Reserve Time": data.data().time,
-          Promotion: "",
-          "Reserve Status": data.data().confirm ? "Confirmed" : "Wait Confirm"
+          reserveTime: data.data().time,
+          promotion: "",
+          reserveStatus: data.data().confirm ? "Confirmed" : "Wait Confirm"
         });
       });
       const mergeList = [...reserved, ...updateList];
@@ -45,15 +44,15 @@ const DashboardPage = props => {
     const updateList = [];
     data.forEach(data =>
       updateList.push({
-        "Reserve No": data.id,
-        "Guest Name": data.name,
-        "E-mail": data.email,
-        "Contact No": data.contact,
-        "Number of Guest": data.people,
-        "Reserve Date": moment(data.date.seconds, "X").format("YYYY-MM-DD"),
-        "Reserve Time": data.time,
-        Promotion: "",
-        "Reserve Status": data.confirm ? "Confirmed" : "Wait Confirm"
+        id: data.id,
+        name: data.name,
+        email: data.email,
+        contact: data.contact,
+        guestno: data.people,
+        reserveDate: moment(data.date.seconds, "X").format("YYYY-MM-DD"),
+        reserveTime: data.time,
+        promotion: "",
+        reserveStatus: data.confirm ? "Confirmed" : "Wait Confirm"
       })
     );
     setReserved(updateList);
@@ -99,7 +98,9 @@ const DashboardPage = props => {
           <Dashboard>
             <Reserve data={reserved} />
           </Dashboard>
-        ) : null}
+        ) : (
+          <h5 style={{ textAlign: "center" }}>Redirect to Login page </h5>
+        )}
       </Provider>
     </React.Fragment>
   );
