@@ -1,23 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
-import { withStyles, makeStyles } from "@material-ui/core/styles";
+import { fade, withStyles, makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
 import { Consumer } from "../../../pages/dashboard/index";
 import Typrography from "../../tyrography";
-import TextField from "@material-ui/core/TextField";
+import TablePagination from "@material-ui/core/TablePagination";
+import Paper from "@material-ui/core/Paper";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 import InputBase from "@material-ui/core/InputBase";
 import DateFnsUtils from "@date-io/date-fns";
+import SearchIcon from "@material-ui/icons/Search";
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker
@@ -26,8 +27,9 @@ import ModalReserve from "./modalReserve";
 
 const StyledTableCell = withStyles(theme => ({
   head: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white
+    backgroundColor: theme.palette.common.white,
+    color: theme.palette.common.black,
+    fontSize: 12
   },
   body: {
     fontSize: 14
@@ -44,7 +46,7 @@ const StyledTableRow = withStyles(theme => ({
 
 const useStyles = makeStyles(theme => ({
   table: {
-    minWidth: 700
+    minWidth: 750
   },
   form: {
     "& > *": {
@@ -105,18 +107,120 @@ const mainStyles = makeStyles(theme => ({
     flexWrap: "warp",
     alignItems: "center",
     marginBottom: theme.spacing(3)
+  },
+  paper: {
+    width: "100%",
+    marginBottom: theme.spacing(2)
+  },
+  headerTable: {
+    display: "flex",
+    alignItems: "center",
+    marginTop: theme.spacing(2),
+    marginLeft: theme.spacing(2)
+  },
+  inputRoot: {
+    color: "inherit"
+  },
+  inputInput: {
+    padding: theme.spacing(1, 1, 1, 7),
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("md")]: {
+      width: 200
+    }
+  },
+  search: {
+    position: "relative",
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: fade(theme.palette.common.black, 0.15),
+    "&:hover": {
+      backgroundColor: fade(theme.palette.common.black, 0.25)
+    },
+    marginLeft: 0,
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      marginLeft: theme.spacing(1),
+      width: "auto"
+    },
+    margin: theme.spacing(1)
+  },
+  searchIcon: {
+    width: theme.spacing(7),
+    height: "100%",
+    position: "absolute",
+    pointerEvents: "none",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  headerTitle: {
+    flexGrow: 1,
+    display: "none",
+    [theme.breakpoints.up("sm")]: {
+      display: "block"
+    }
   }
 }));
 
 const ReserveDashboard = props => {
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [filterPayload, setFilterPayload] = useState([]);
+  const [statusPayload, setStatusPayload] = useState([]);
+  const [searchValue, setSearchValue] = useState("");
+  const [status, setStatus] = useState("Waiting");
   const classes = useStyles();
   const styles = mainStyles();
-
-  const rows = [...props.data];
   const [selectedDate, setSelectedDate] = useState(new Date());
+
+  useEffect(() => {
+    let filter = [...statusPayload];
+
+    setFilterPayload(
+      filter.slice(rowsPerPage * page, rowsPerPage * (page + 1))
+    );
+  }, [page, rowsPerPage, statusPayload]);
+
+  useEffect(() => {
+    const data = [...statusPayload];
+    if (data.length > 0) {
+      setFilterPayload(
+        data.filter(data => {
+          return (
+            data.name.includes(searchValue) ||
+            data.email.includes(searchValue) ||
+            data.contact.includes(searchValue) ||
+            data.reserveDate.includes(searchValue) ||
+            data.reserveTime.includes(searchValue)
+          );
+        })
+      );
+    }
+  }, [searchValue]);
+
+  useEffect(() => {
+    const result = [...props.data];
+    if (result.length > 0) {
+      setStatusPayload(
+        result.filter(data => {
+          return data.reserveStatus.includes(status === "All" ? "" : status);
+        })
+      );
+    }
+  }, [status]);
 
   const handleDateChange = date => {
     setSelectedDate(date);
+  };
+
+  const handleChangePage = (event, newPage) => {
+    event.preventDefault();
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = event => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
   };
 
   return (
@@ -141,15 +245,23 @@ const ReserveDashboard = props => {
               labelId="demo-customized-select-label"
               id="demo-customized-select"
               input={<BootstrapInput />}
-              style={{ width: 200 }}
+              style={{ width: 250 }}
               placeholder="Reserve Status"
+              value={status}
+              onChange={event => setStatus(event.target.value)}
             >
-              <MenuItem value="">
-                <em>None</em>
+              <MenuItem value="All">
+                <em>All</em>
               </MenuItem>
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
+              <MenuItem value="Waiting">
+                <em>Waiting Confirm</em>
+              </MenuItem>
+              <MenuItem value="Confirmed">
+                <em>Confirmed</em>
+              </MenuItem>
+              <MenuItem value="Cancel">
+                <em>Reserve Cancel</em>
+              </MenuItem>
             </Select>
           </FormControl>
         </div>
@@ -172,61 +284,95 @@ const ReserveDashboard = props => {
             />
           </MuiPickersUtilsProvider>
         </div>
-        <TableContainer component={Paper}>
-          <Table className={classes.table} aria-label="customized table">
-            <TableHead>
-              <TableRow>
-                <StyledTableCell>Management</StyledTableCell>
-                <StyledTableCell>Reserve No</StyledTableCell>
-                <StyledTableCell align="right">Guest Name</StyledTableCell>
-                <StyledTableCell align="right">E-Mail</StyledTableCell>
-                <StyledTableCell align="right">Contact No.</StyledTableCell>
-                <StyledTableCell align="right">Number of Guest</StyledTableCell>
-                <StyledTableCell align="right">Reserve Date</StyledTableCell>
-                <StyledTableCell align="right">Reserve Time</StyledTableCell>
-                <StyledTableCell align="right">Promotion</StyledTableCell>
-                <StyledTableCell align="right">Reserve Status</StyledTableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows.map(row => (
-                <StyledTableRow key={row.name}>
-                  <StyledTableCell component="th" scope="row">
-                    <ModalReserve
-                      id={row.id}
-                      name={row.name}
-                      email={row.email}
-                      contact={row.contact}
-                      numberGuest={row.guestno}
-                      reserveDate={row.reserveDate}
-                      reserveTime={row.reserveTime}
-                      reserveStatus={row.reserveStatus}
-                    />
-                  </StyledTableCell>
-                  <StyledTableCell component="th" scope="row">
-                    {row.id}
-                  </StyledTableCell>
-                  <StyledTableCell align="right">{row.name}</StyledTableCell>
-                  <StyledTableCell align="right">{row.email}</StyledTableCell>
-                  <StyledTableCell align="right">{row.contact}</StyledTableCell>
-                  <StyledTableCell align="right">{row.guestno}</StyledTableCell>
+        <Paper className={styles.paper}>
+          <div className={styles.headerTable}>
+            <div className={styles.headerTitle}>
+              <Typrography variant="h4">Thai Vintage Whitchurch</Typrography>
+            </div>
+            <div className={styles.search}>
+              <div className={styles.searchIcon}>
+                <SearchIcon />
+              </div>
+              <InputBase
+                placeholder="Search…"
+                classes={{
+                  root: styles.inputRoot,
+                  input: styles.inputInput
+                }}
+                inputProps={{ "aria-label": "search" }}
+                value={searchValue}
+                onChange={event => setSearchValue(event.target.value)}
+              />
+            </div>
+          </div>
+          <TableContainer>
+            <Table className={classes.table} aria-label="customized table">
+              <TableHead>
+                <TableRow>
+                  <StyledTableCell>Management</StyledTableCell>
+                  <StyledTableCell>Reserve No</StyledTableCell>
+                  <StyledTableCell align="right">Guest Name</StyledTableCell>
+                  <StyledTableCell align="right">E-Mail</StyledTableCell>
+                  <StyledTableCell align="right">Contact No.</StyledTableCell>
+                  <StyledTableCell align="right">Guest No.</StyledTableCell>
+                  <StyledTableCell align="right">Reserve Date</StyledTableCell>
+                  <StyledTableCell align="right">Reserve Time</StyledTableCell>
                   <StyledTableCell align="right">
-                    {row.reserveDate}
+                    Reserve Status
                   </StyledTableCell>
-                  <StyledTableCell align="right">
-                    {row.reserveTime}
-                  </StyledTableCell>
-                  <StyledTableCell align="right">
-                    {row.promotion}
-                  </StyledTableCell>
-                  <StyledTableCell align="right">
-                    {row.reserveStatus}
-                  </StyledTableCell>
-                </StyledTableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {filterPayload.map(row => (
+                  <StyledTableRow key={row.name}>
+                    <StyledTableCell component="th" scope="row">
+                      <ModalReserve
+                        id={row.id}
+                        name={row.name}
+                        email={row.email}
+                        contact={row.contact}
+                        numberGuest={row.guestno}
+                        reserveDate={row.reserveDate}
+                        reserveTime={row.reserveTime}
+                        reserveStatus={row.reserveStatus}
+                        remark={row.request}
+                      />
+                    </StyledTableCell>
+                    <StyledTableCell component="th" scope="row">
+                      {row.id}
+                    </StyledTableCell>
+                    <StyledTableCell align="right">{row.name}</StyledTableCell>
+                    <StyledTableCell align="right">{row.email}</StyledTableCell>
+                    <StyledTableCell align="right">
+                      {row.contact}
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
+                      {row.guestno}
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
+                      {row.reserveDate}
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
+                      {row.reserveTime}
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
+                      {row.reserveStatus}
+                    </StyledTableCell>
+                  </StyledTableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TablePagination
+            rowsPerPageOptions={[5, 10, 25]}
+            component="div"
+            count={statusPayload.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onChangePage={handleChangePage}
+            onChangeRowsPerPage={handleChangeRowsPerPage}
+          />
+        </Paper>
       </section>
     </React.Fragment>
   );

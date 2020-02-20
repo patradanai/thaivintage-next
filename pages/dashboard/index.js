@@ -28,7 +28,8 @@ const DashboardPage = props => {
           ),
           reserveTime: data.data().time,
           promotion: "",
-          reserveStatus: data.data().confirm ? "Confirmed" : "Wait Confirm"
+          reserveStatus: data.data().confirm ? "Confirmed" : "Waiting Confirm",
+          request: data.data().request
         });
       });
       const mergeList = [...reserved, ...updateList];
@@ -52,7 +53,8 @@ const DashboardPage = props => {
         reserveDate: moment(data.date.seconds, "X").format("YYYY-MM-DD"),
         reserveTime: data.time,
         promotion: "",
-        reserveStatus: data.confirm ? "Confirmed" : "Wait Confirm"
+        reserveStatus: data.confirm ? "Confirmed" : "Waiting Confirm",
+        request: data.request
       })
     );
     setReserved(updateList);
