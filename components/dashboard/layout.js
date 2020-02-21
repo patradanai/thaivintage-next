@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect, createContext } from "react";
+import router from "next/router";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -15,14 +16,16 @@ import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import Button from "../button";
 import { mainListItems, secondaryListItems } from "./listitem";
-import { Consumer } from "../../pages/dashboard";
+import { loadDBFirebase } from "../../lib/firebase";
+export const { Provider, Consumer } = createContext();
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
+      <Link color="inherit" href="www.thaivintagewhitchurch.co.uk">
         Thai Vintage Whitchurch
       </Link>{" "}
       {new Date().getFullYear()}
@@ -109,86 +112,124 @@ const useStyles = makeStyles(theme => ({
   },
   fixedHeight: {
     height: 240
+  },
+  button: {
+    color: theme.palette.common.white
   }
 }));
 
 export default function Dashboard(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
+  const [authUser, setAuthUser] = useState(null);
+  const [flagCheck, setFlagCheck] = useState(false);
+
+  useEffect(() => {
+    if (authUser !== null && flagCheck === true) {
+    } else if (authUser === null && flagCheck === true) {
+      router.push("/login");
+    }
+  }, [authUser, flagCheck]);
+
+  useEffect(() => {
+    checkAuth();
+  }, []);
+
+  const checkAuth = async () => {
+    let firebase = await loadDBFirebase();
+    firebase.auth().onAuthStateChanged(result => {
+      if (result) {
+        setAuthUser(result.email);
+        setFlagCheck(true);
+      } else {
+        setAuthUser(null);
+        setFlagCheck(true);
+      }
+    });
+  };
+
+  const userSignOut = async () => {
+    let firebase = await loadDBFirebase();
+    firebase
+      .auth()
+      .signOut()
+      .then(() => setAuthUser(null))
+      .catch(err => console.log(err.message));
+  };
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   return (
-    <Consumer>
-      {auth => (
-        <div className={classes.root}>
-          <CssBaseline />
-          <AppBar
-            position="absolute"
-            className={clsx(classes.appBar, open && classes.appBarShift)}
+    <div className={classes.root}>
+      <CssBaseline />
+      <AppBar
+        position="absolute"
+        className={clsx(classes.appBar, open && classes.appBarShift)}
+      >
+        <Toolbar className={classes.toolbar}>
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            className={clsx(
+              classes.menuButton,
+              open && classes.menuButtonHidden
+            )}
           >
-            <Toolbar className={classes.toolbar}>
-              <IconButton
-                edge="start"
-                color="inherit"
-                aria-label="open drawer"
-                onClick={handleDrawerOpen}
-                className={clsx(
-                  classes.menuButton,
-                  open && classes.menuButtonHidden
-                )}
-              >
-                <MenuIcon />
-              </IconButton>
-              <Typography
-                component="h1"
-                variant="h6"
-                color="inherit"
-                noWrap
-                className={classes.title}
-              >
-                Welcome : {auth.auth}
-              </Typography>
-            </Toolbar>
-          </AppBar>
-          <Drawer
-            variant="permanent"
-            classes={{
-              paper: clsx(
-                classes.drawerPaper,
-                !open && classes.drawerPaperClose
-              )
-            }}
-            open={open}
+            <MenuIcon />
+          </IconButton>
+          <Typography
+            component="h1"
+            variant="h6"
+            color="inherit"
+            noWrap
+            className={classes.title}
           >
-            <div className={classes.toolbarIcon}>
-              <IconButton onClick={handleDrawerClose}>
-                <ChevronLeftIcon />
-              </IconButton>
-            </div>
-            <Divider />
-            <List>{mainListItems}</List>
-            <Divider />
-            <List>{secondaryListItems}</List>
-          </Drawer>
-          <main className={classes.content}>
-            <div className={classes.appBarSpacer} />
-            <Container maxWidth="lg" className={classes.container}>
-              <Grid container spacing={3}>
-                {props.children}
-              </Grid>
-              <Box pt={4}>
-                <Copyright />
-              </Box>
-            </Container>
-          </main>
+            Welcome :
+          </Typography>
+          <Button className={classes.button} onClick={userSignOut}>
+            Logout
+          </Button>
+        </Toolbar>
+      </AppBar>
+      <Drawer
+        variant="permanent"
+        classes={{
+          paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose)
+        }}
+        open={open}
+      >
+        <div className={classes.toolbarIcon}>
+          <IconButton onClick={handleDrawerClose}>
+            <ChevronLeftIcon />
+          </IconButton>
         </div>
-      )}
-    </Consumer>
+        <Divider />
+        <List>{mainListItems}</List>
+        <Divider />
+        <List>{secondaryListItems}</List>
+      </Drawer>
+      <main className={classes.content}>
+        <div className={classes.appBarSpacer} />
+        <Container maxWidth="lg" className={classes.container}>
+          <Grid container spacing={3}>
+            {authUser ? (
+              props.children
+            ) : (
+              <h5 style={{ textAlign: "center" }}>Redirect to Login page </h5>
+            )}
+          </Grid>
+          <Box pt={4}>
+            <Copyright />
+          </Box>
+        </Container>
+      </main>
+    </div>
   );
 }
