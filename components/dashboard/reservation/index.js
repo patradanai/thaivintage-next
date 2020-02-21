@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
-import clsx from "clsx";
 import { fade, withStyles, makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -24,6 +22,8 @@ import {
   KeyboardDatePicker
 } from "@material-ui/pickers";
 import ModalReserve from "./modalReserve";
+import moment from "moment";
+import { Button } from "@material-ui/core";
 
 const StyledTableCell = withStyles(theme => ({
   head: {
@@ -104,7 +104,7 @@ const mainStyles = makeStyles(theme => ({
   },
   reservationBox: {
     display: "flex",
-    flexWrap: "warp",
+    flexDirection: "row",
     alignItems: "center",
     marginBottom: theme.spacing(3)
   },
@@ -159,19 +159,23 @@ const mainStyles = makeStyles(theme => ({
     [theme.breakpoints.up("sm")]: {
       display: "block"
     }
+  },
+  button: {
+    marginTop: theme.spacing(3)
   }
 }));
 
 const ReserveDashboard = props => {
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
   const [filterPayload, setFilterPayload] = useState([]);
   const [statusPayload, setStatusPayload] = useState([]);
+  const [clear, setClear] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [status, setStatus] = useState("Waiting");
   const classes = useStyles();
   const styles = mainStyles();
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(null);
 
   useEffect(() => {
     let filter = [...statusPayload];
@@ -199,6 +203,20 @@ const ReserveDashboard = props => {
   }, [searchValue]);
 
   useEffect(() => {
+    const data = [...statusPayload];
+    if (data.length > 0 && selectedDate != null) {
+      setFilterPayload(
+        data.filter(data => {
+          return (
+            data.reserveDate ===
+            moment(selectedDate, "llll").format("YYYY-MM-DD")
+          );
+        })
+      );
+    }
+  }, [selectedDate]);
+
+  useEffect(() => {
     const result = [...props.data];
     if (result.length > 0) {
       setStatusPayload(
@@ -207,7 +225,7 @@ const ReserveDashboard = props => {
         })
       );
     }
-  }, [status]);
+  }, [status, props.data, clear]);
 
   const handleDateChange = date => {
     setSelectedDate(date);
@@ -223,6 +241,20 @@ const ReserveDashboard = props => {
     setPage(0);
   };
 
+  const handleChangeStatus = event => {
+    event.preventDefault();
+    setSelectedDate(null);
+    setStatus(event.target.value);
+  };
+
+  const handleClearFilter = event => {
+    event.preventDefault();
+    setSearchValue("");
+    setSelectedDate(null);
+    setStatus("Waiting");
+    setClear(!clear);
+  };
+
   return (
     <React.Fragment>
       <section className={styles.root}>
@@ -231,12 +263,8 @@ const ReserveDashboard = props => {
         </Typrography>
         <div className={styles.reservationBox}>
           <Typrography variant="h5" className={styles.title}>
-            Reserve Date :
+            Reserve Status :
           </Typrography>
-          <FormControl className={styles.margin}>
-            <InputLabel htmlFor="demo-customized-textbox">Fill Text</InputLabel>
-            <BootstrapInput id="demo-customized-textbox" />
-          </FormControl>
           <FormControl className={styles.margin}>
             <InputLabel id="demo-customized-select-label">
               Reserve Status
@@ -248,7 +276,7 @@ const ReserveDashboard = props => {
               style={{ width: 250 }}
               placeholder="Reserve Status"
               value={status}
-              onChange={event => setStatus(event.target.value)}
+              onChange={handleChangeStatus}
             >
               <MenuItem value="All">
                 <em>All</em>
@@ -264,6 +292,15 @@ const ReserveDashboard = props => {
               </MenuItem>
             </Select>
           </FormControl>
+          <Button
+            variant="outlined"
+            size="large"
+            color="secondary"
+            className={styles.button}
+            onClick={handleClearFilter}
+          >
+            Clear Filter
+          </Button>
         </div>
         <div className={styles.reservationBox}>
           <Typrography variant="h5" className={styles.title}>

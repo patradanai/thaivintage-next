@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
@@ -15,6 +15,8 @@ import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import Paper from "@material-ui/core/Paper";
 import Typography from "../../tyrography";
+import { loadDBFirebase } from "../../../lib/firebase";
+import axios from "axios";
 
 const styles = theme => ({
   root: {
@@ -61,13 +63,40 @@ const DialogActions = withStyles(theme => ({
 }))(MuiDialogActions);
 
 const ReserveDialogs = props => {
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
+  const [open, setOpen] = useState(false);
+  const handleClickOpen = event => {
+    event.preventDefault();
     setOpen(true);
   };
-  const handleClose = () => {
+  const handleClose = event => {
+    event.preventDefault();
     setOpen(false);
+  };
+
+  const updateFirebase = async event => {
+    event.preventDefault();
+    firebaseConfirm();
+  };
+
+  const firebaseConfirm = async () => {
+    const firebase = await loadDBFirebase();
+    firebase
+      .firestore()
+      .collection("reservation")
+      .doc(props.id)
+      .update({ confirm: true })
+      .then(res => {
+        axios.post("http://localhost:8080/api", {
+          email: props.email,
+          name: props.name,
+          people: props.numberGuest,
+          timeReserve: props.reserveDate,
+          dateReserve: props.reserveTime
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 
   return (
@@ -139,7 +168,7 @@ const ReserveDialogs = props => {
             <div>
               <Button
                 autoFocus
-                onClick={handleClose}
+                onClick={updateFirebase}
                 variant="outlined"
                 color="primary"
                 style={{
@@ -148,18 +177,6 @@ const ReserveDialogs = props => {
                 }}
               >
                 Accept
-              </Button>
-              <Button
-                autoFocus
-                onClick={handleClose}
-                variant="outlined"
-                color="primary"
-                style={{
-                  backgroundColor: "red",
-                  margin: 5
-                }}
-              >
-                Not Accept
               </Button>
             </div>
           ) : (

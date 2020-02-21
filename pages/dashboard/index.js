@@ -14,27 +14,32 @@ const DashboardPage = props => {
 
   useEffect(() => {
     let db = loadDBFirebase().firestore();
-    let unsubscribe = db.collection("reservation").onSnapshot(snapshot => {
-      let updateList = [];
-      snapshot.forEach(data => {
-        updateList.push({
-          id: data.id,
-          name: data.data().name,
-          email: data.data().email,
-          contact: data.data().contact,
-          guestno: data.data().people,
-          reserveDate: moment(data.data().date.seconds, "X").format(
-            "YYYY-MM-DD"
-          ),
-          reserveTime: data.data().time,
-          promotion: "",
-          reserveStatus: data.data().confirm ? "Confirmed" : "Waiting Confirm",
-          request: data.data().request
+    let unsubscribe = db
+      .collection("reservation")
+      .orderBy("date", "asc")
+      .onSnapshot(snapshot => {
+        let updateList = [];
+        snapshot.forEach(data => {
+          updateList.push({
+            id: data.id,
+            name: data.data().name,
+            email: data.data().email,
+            contact: data.data().contact,
+            guestno: data.data().people,
+            reserveDate: moment(data.data().date.seconds, "X").format(
+              "YYYY-MM-DD"
+            ),
+            reserveTime: data.data().time,
+            promotion: "",
+            reserveStatus: data.data().confirm
+              ? "Confirmed"
+              : "Waiting Confirm",
+            request: data.data().request
+          });
         });
+        const mergeList = [...reserved, ...updateList];
+        setReserved(mergeList);
       });
-      const mergeList = [...reserved, ...updateList];
-      setReserved(mergeList);
-    });
     return () => {
       unsubscribe();
     };
@@ -66,7 +71,6 @@ const DashboardPage = props => {
 
   useEffect(() => {
     if (authUser !== null && flagCheck === true) {
-      console.log("Welcome");
     } else if (authUser === null && flagCheck === true) {
       router.push("/login");
     }
@@ -114,6 +118,7 @@ DashboardPage.getInitialProps = async () => {
   let data = [];
   const result = await db
     .collection("reservation")
+    .orderBy("date", "asc")
     .get()
     .then(snapshot => {
       snapshot.forEach(doc => {
