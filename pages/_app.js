@@ -4,6 +4,8 @@ import Head from "next/head";
 import { ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import theme from "../src/theme";
+import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
+import "react-big-calendar/lib/css/react-big-calendar.css";
 
 export default class MyApp extends App {
   componentDidMount() {
@@ -20,7 +22,7 @@ export default class MyApp extends App {
     return (
       <React.Fragment>
         <Head>
-          <title>ThaiVintage Whitchurch</title>
+          <title>Thai Vintage Whitchurch</title>
           <meta
             name="viewport"
             content="width=device-width, initial-scale=1, user-scalable=0, maximum-scale=1, minimum-scale=1"

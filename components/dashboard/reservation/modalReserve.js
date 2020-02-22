@@ -86,7 +86,7 @@ const ReserveDialogs = props => {
       .doc(props.id)
       .update({ confirm: true })
       .then(res => {
-        axios.post("http://localhost:8080/api", {
+        axios.post("https://thaivintagewhitchurch-268910.appspot.com/api", {
           email: props.email,
           name: props.name,
           people: props.numberGuest,

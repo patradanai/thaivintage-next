@@ -24,6 +24,7 @@ import {
 import ModalReserve from "./modalReserve";
 import moment from "moment";
 import { Button } from "@material-ui/core";
+import { CSVLink } from "react-csv";
 
 const StyledTableCell = withStyles(theme => ({
   head: {
@@ -170,12 +171,17 @@ const ReserveDashboard = props => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [filterPayload, setFilterPayload] = useState([]);
   const [statusPayload, setStatusPayload] = useState([]);
+  const [csvDownload, setCsvDownload] = useState([]);
   const [clear, setClear] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [status, setStatus] = useState("Waiting");
   const classes = useStyles();
   const styles = mainStyles();
   const [selectedDate, setSelectedDate] = useState(null);
+
+  useEffect(() => {
+    setCsvDownload([...filterPayload]);
+  }, [filterPayload]);
 
   useEffect(() => {
     let filter = [...statusPayload];
@@ -187,44 +193,52 @@ const ReserveDashboard = props => {
 
   useEffect(() => {
     const data = [...statusPayload];
+    let search = [];
     if (data.length > 0) {
-      setFilterPayload(
-        data.filter(data => {
-          return (
-            data.name.includes(searchValue) ||
-            data.email.includes(searchValue) ||
-            data.contact.includes(searchValue) ||
-            data.reserveDate.includes(searchValue) ||
-            data.reserveTime.includes(searchValue)
-          );
-        })
-      );
+      search = data.filter(data => {
+        return (
+          data.name.includes(searchValue) ||
+          data.email.includes(searchValue) ||
+          data.contact.includes(searchValue) ||
+          data.reserveDate.includes(searchValue) ||
+          data.reserveTime.includes(searchValue)
+        );
+      });
     }
+    // Set for Payload
+    setFilterPayload(search);
+    // Set fot CSV
+    setCsvDownload(search);
   }, [searchValue]);
 
   useEffect(() => {
     const data = [...statusPayload];
+    let filter = [];
     if (data.length > 0 && selectedDate != null) {
-      setFilterPayload(
-        data.filter(data => {
-          return (
-            data.reserveDate ===
-            moment(selectedDate, "llll").format("YYYY-MM-DD")
-          );
-        })
-      );
+      filter = data.filter(data => {
+        return (
+          data.reserveDate === moment(selectedDate, "llll").format("YYYY-MM-DD")
+        );
+      });
+      // Set for Payload
+      setFilterPayload(filter);
+      // Set fot CSV
+      setCsvDownload(payout);
     }
   }, [selectedDate]);
 
   useEffect(() => {
     const result = [...props.data];
+    let payout = [];
     if (result.length > 0) {
-      setStatusPayload(
-        result.filter(data => {
-          return data.reserveStatus.includes(status === "All" ? "" : status);
-        })
-      );
+      payout = result.filter(data => {
+        return data.reserveStatus.includes(status === "All" ? "" : status);
+      });
     }
+    // Set for Payload
+    setStatusPayload(payout);
+    // Set fot CSV
+    setCsvDownload(payout);
   }, [status, props.data, clear]);
 
   const handleDateChange = date => {
@@ -326,6 +340,10 @@ const ReserveDashboard = props => {
             <div className={styles.headerTitle}>
               <Typrography variant="h4">Thai Vintage Whitchurch</Typrography>
             </div>
+
+            <Button variant="outlined" color="inherit">
+              <CSVLink data={csvDownload}>Download CSV</CSVLink>
+            </Button>
             <div className={styles.search}>
               <div className={styles.searchIcon}>
                 <SearchIcon />
