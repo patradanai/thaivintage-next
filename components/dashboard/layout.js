@@ -124,6 +124,13 @@ export default function Dashboard(props) {
   const [authUser, setAuthUser] = useState(null);
   const [flagCheck, setFlagCheck] = useState(false);
 
+  const clientId =
+    "468408425438-obcg1t2i7tbgh1089avslst12k5bs7vt.apps.googleusercontent.com";
+  const GOOGLE_API_KEY = "AIzaSyBhH47ELc9gEXMVlraQSskoV7X7_01Dn_Q";
+  const url = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
+  const rule = "https://www.googleapis.com/auth/calendar";
+
+  // Check Auth from Firebase Login
   useEffect(() => {
     if (authUser !== null && flagCheck === true) {
     } else if (authUser === null && flagCheck === true) {
@@ -146,6 +153,35 @@ export default function Dashboard(props) {
         setFlagCheck(true);
       }
     });
+  };
+
+  // Check Auth from Google Calendar
+
+  useEffect(() => {
+    initClient();
+  }, []);
+
+  const initClient = () => {
+    gapi.load("client", () => {
+      gapi.client
+        .init({
+          apiKey: GOOGLE_API_KEY,
+          clientId: clientId,
+          discoveryDocs: url,
+          scope: rule
+        })
+        .then(() => {
+          gapi.auth2.getAuthInstance().isSignedIn.listen(updateStatus);
+          console.log(gapi.auth2.getAuthInstance().isSignedIn.get());
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    });
+  };
+
+  const updateStatus = data => {
+    console.log(data);
   };
 
   const userSignOut = async () => {
