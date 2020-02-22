@@ -342,7 +342,12 @@ const ReserveDashboard = props => {
             </div>
 
             <Button variant="outlined" color="inherit">
-              <CSVLink data={csvDownload}>Download CSV</CSVLink>
+              <CSVLink
+                data={csvDownload}
+                style={{ textDecoration: "none", color: "#000" }}
+              >
+                Download CSV
+              </CSVLink>
             </Button>
             <div className={styles.search}>
               <div className={styles.searchIcon}>
