@@ -9,7 +9,8 @@ import Google from "../../googleMap";
 const styles = theme => ({
   root: {
     display: "flex",
-    overflow: "hidden"
+    overflow: "hidden",
+    backgroundColor: "#e4c290"
   },
   container: {
     marginTop: theme.spacing(2),
@@ -54,8 +55,8 @@ const styles = theme => ({
     position: "relative",
     display: "block",
     justifyContent: "center",
-    marginBottom: theme.spacing(1),
-    marginTop: theme.spacing(1)
+    marginBottom: theme.spacing(3),
+    marginTop: theme.spacing(3)
   }
 });
 
@@ -64,6 +65,19 @@ const AppLocation = props => {
   return (
     <section className={classes.root}>
       <Container className={classes.container}>
+        <Typography variant="h5">
+          <a
+            style={{
+              textDecoration: "none",
+              color: "black",
+              fontSize: 25
+            }}
+            href="https://www.google.com/maps/place/Thai+Vintage+Whitchurch/@52.9681605,-2.6864069,19z/data=!3m1!4b1!4m5!3m4!1s0x0:0xbf366d0ce8f023dd!8m2!3d52.9681597!4d-2.6858597"
+          >
+            >>> Click for Get Direction `Thai Vintage Whitchurch, Old Mill, Park
+            Ave,`
+          </a>
+        </Typography>
         <div className={classes.mapSrc}>
           <Google
             googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6ZlEgybYqVlX6oFQZ5FulqUlMMnyMqjA"

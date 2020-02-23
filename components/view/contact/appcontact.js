@@ -72,9 +72,9 @@ const Contact = props => {
               <Typography variant="h5" align="center" className={classes.Text}>
                 Open 6 days <br />
                 Lunch: Tuesday- Sunday <br />
-                12.00 - 2.30 pm <br />
+                12.00 pm - 2.30 pm <br />
                 Dinner: Tuesday- Sunday <br />
-                5.30pm - 10.00 pm
+                5.30 pm - 10.00 pm
               </Typography>
             </div>
           </Grid>
