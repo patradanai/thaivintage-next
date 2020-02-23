@@ -17,8 +17,9 @@ import Link from "@material-ui/core/Link";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import Button from "../button";
-import { mainListItems, secondaryListItems } from "./listitem";
+import { mainListItems } from "./listitem";
 import { loadDBFirebase } from "../../lib/firebase";
+import CircularProgress from "@material-ui/core/CircularProgress";
 export const { Provider, Consumer } = createContext();
 
 function Copyright() {
@@ -138,6 +139,8 @@ export default function Dashboard(props) {
   const [flagCheck, setFlagCheck] = useState(false);
   const [authGoogle, setAuthGoogle] = useState(false);
   const [flagDraw, setFlagDraw] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [loadingGoogle, setLoadingGoogle] = useState(false);
 
   const clientId =
     "468408425438-obcg1t2i7tbgh1089avslst12k5bs7vt.apps.googleusercontent.com";
@@ -163,6 +166,7 @@ export default function Dashboard(props) {
       if (result) {
         setAuthUser(result.email);
         setFlagCheck(true);
+        setLoading(true);
       } else {
         setAuthUser(null);
         setFlagCheck(true);
@@ -197,7 +201,7 @@ export default function Dashboard(props) {
         .then(() => {
           // Listening Auth
           gapi.auth2.getAuthInstance().isSignedIn.listen(updateStatus);
-
+          setLoadingGoogle(true);
           // Check Auth
           if (!gapi.auth2.getAuthInstance().isSignedIn.get()) {
             handleAuthSignIn();
@@ -330,29 +334,37 @@ export default function Dashboard(props) {
             spacing={3}
             style={{ display: "flex", justifyContent: "center" }}
           >
-            {authUser ? (
-              authGoogle ? (
-                props.children
+            {loading ? (
+              authUser ? (
+                loadingGoogle ? (
+                  authGoogle ? (
+                    props.children
+                  ) : (
+                    <div
+                      style={{
+                        textAlign: "center",
+                        border: "1px solid",
+                        padding: 20
+                      }}
+                    >
+                      <h2>Please Login Google Autherication</h2>
+                      <Button
+                        variant="contained"
+                        color="secondary"
+                        style={{ marginTop: 50 }}
+                      >
+                        Login Google
+                      </Button>
+                    </div>
+                  )
+                ) : (
+                  <CircularProgress disableShrink />
+                )
               ) : (
-                <div
-                  style={{
-                    textAlign: "center",
-                    border: "1px solid",
-                    padding: 20
-                  }}
-                >
-                  <h2>Please Login Google Autherication</h2>
-                  <Button
-                    variant="contained"
-                    color="secondary"
-                    style={{ marginTop: 50 }}
-                  >
-                    Login Google
-                  </Button>
-                </div>
+                <h5 style={{ textAlign: "center" }}>Redirect to Login page </h5>
               )
             ) : (
-              <h5 style={{ textAlign: "center" }}>Redirect to Login page </h5>
+              <CircularProgress disableShrink />
             )}
           </Grid>
           <Box pt={4}>
