@@ -55,7 +55,8 @@ const useStyles = makeStyles(theme => ({
     transition: theme.transitions.create(["width", "margin"], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
-    })
+    }),
+    backgroundColor: "#e48c4ee0"
   },
   appBarShift: {
     marginLeft: drawerWidth,
@@ -114,7 +115,19 @@ const useStyles = makeStyles(theme => ({
     height: 240
   },
   button: {
-    color: theme.palette.common.white
+    color: theme.palette.common.black,
+    border: "2px solid #000",
+    "&:hover": {
+      backgroundColor: "white"
+    }
+  },
+  imageDraw: {
+    display: "flex",
+    justifyContent: "center",
+    flexDirection: "column",
+    alignItems: "center",
+    marginTop: theme.spacing(3),
+    marginBottom: theme.spacing(3)
   }
 }));
 
@@ -123,6 +136,8 @@ export default function Dashboard(props) {
   const [open, setOpen] = React.useState(true);
   const [authUser, setAuthUser] = useState(null);
   const [flagCheck, setFlagCheck] = useState(false);
+  const [authGoogle, setAuthGoogle] = useState(false);
+  const [flagDraw, setFlagDraw] = useState(true);
 
   const clientId =
     "468408425438-obcg1t2i7tbgh1089avslst12k5bs7vt.apps.googleusercontent.com";
@@ -155,6 +170,15 @@ export default function Dashboard(props) {
     });
   };
 
+  const userSignOut = async () => {
+    let firebase = await loadDBFirebase();
+    firebase
+      .auth()
+      .signOut()
+      .then(() => setAuthUser(null))
+      .catch(err => console.log(err.message));
+  };
+
   // Check Auth from Google Calendar
 
   useEffect(() => {
@@ -171,8 +195,15 @@ export default function Dashboard(props) {
           scope: rule
         })
         .then(() => {
+          // Listening Auth
           gapi.auth2.getAuthInstance().isSignedIn.listen(updateStatus);
-          console.log(gapi.auth2.getAuthInstance().isSignedIn.get());
+
+          // Check Auth
+          if (!gapi.auth2.getAuthInstance().isSignedIn.get()) {
+            handleAuthSignIn();
+          } else {
+            setAuthGoogle(true);
+          }
         })
         .catch(err => {
           console.log(err);
@@ -181,23 +212,45 @@ export default function Dashboard(props) {
   };
 
   const updateStatus = data => {
-    console.log(data);
+    setAuthGoogle(data);
   };
 
-  const userSignOut = async () => {
-    let firebase = await loadDBFirebase();
-    firebase
-      .auth()
-      .signOut()
-      .then(() => setAuthUser(null))
-      .catch(err => console.log(err.message));
+  const handleAuthSignIn = () => {
+    gapi.auth2.getAuthInstance().signIn();
+  };
+
+  const handleAuthSignOut = () => {
+    gapi.auth2.getAuthInstance().signOut();
   };
 
   const handleDrawerOpen = () => {
     setOpen(true);
+    setFlagDraw(true);
   };
   const handleDrawerClose = () => {
     setOpen(false);
+    setFlagDraw(false);
+  };
+
+  const listComingEvent = () => {
+    gapi.client.calendar.events
+      .list({
+        calendarId:
+          "thaivintagewhitchurch.co.uk_ert6u9r95pcadm2d73fsr1f78k@group.calendar.google.com",
+        timeMin: new Date().toISOString(),
+        showDeleted: false,
+        singleEvents: true,
+        maxResults: 10,
+        orderBy: "startTime"
+      })
+      .then(res => {
+        const event = res.result.items;
+        if (event.length > 0) {
+          console.log(event);
+        } else {
+          console.log("No event Coming");
+        }
+      });
   };
 
   return (
@@ -226,9 +279,7 @@ export default function Dashboard(props) {
             color="inherit"
             noWrap
             className={classes.title}
-          >
-            Welcome :
-          </Typography>
+          ></Typography>
           <Button className={classes.button} onClick={userSignOut}>
             Logout
           </Button>
@@ -246,17 +297,60 @@ export default function Dashboard(props) {
             <ChevronLeftIcon />
           </IconButton>
         </div>
+        {flagDraw ? (
+          <div className={classes.imageDraw}>
+            <img
+              src="/images/logo.png"
+              style={{
+                width: 120,
+                height: 120,
+                borderRadius: "50%",
+                overflow: "hidden",
+                marginTop: "-20%"
+              }}
+            ></img>
+            <Typography
+              variant="h5"
+              color="secondary"
+              style={{ marginTop: 20, marginBottom: 20 }}
+            >
+              Welcome
+            </Typography>
+            {authUser}
+          </div>
+        ) : null}
         <Divider />
         <List>{mainListItems}</List>
-        <Divider />
-        <List>{secondaryListItems}</List>
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
-          <Grid container spacing={3}>
+          <Grid
+            container
+            spacing={3}
+            style={{ display: "flex", justifyContent: "center" }}
+          >
             {authUser ? (
-              props.children
+              authGoogle ? (
+                props.children
+              ) : (
+                <div
+                  style={{
+                    textAlign: "center",
+                    border: "1px solid",
+                    padding: 20
+                  }}
+                >
+                  <h2>Please Login Google Autherication</h2>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    style={{ marginTop: 50 }}
+                  >
+                    Login Google
+                  </Button>
+                </div>
+              )
             ) : (
               <h5 style={{ textAlign: "center" }}>Redirect to Login page </h5>
             )}

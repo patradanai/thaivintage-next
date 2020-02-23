@@ -17,6 +17,7 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "../../tyrography";
 import { loadDBFirebase } from "../../../lib/firebase";
 import axios from "axios";
+import moment from "moment";
 
 const styles = theme => ({
   root: {
@@ -67,6 +68,7 @@ const ReserveDialogs = props => {
   const handleClickOpen = event => {
     event.preventDefault();
     setOpen(true);
+    insertCalendar();
   };
   const handleClose = event => {
     event.preventDefault();
@@ -96,6 +98,32 @@ const ReserveDialogs = props => {
       })
       .catch(err => {
         console.log(err);
+      });
+  };
+
+  // Insert to Google Calendar
+  const insertCalendar = () => {
+    gapi.client.calendar.events
+      .insert({
+        calendarId:
+          "thaivintagewhitchurch.co.uk_ert6u9r95pcadm2d73fsr1f78k@group.calendar.google.com",
+        resource: {
+          summary: `${props.name} | ${props.email}`,
+          location:
+            "Old Mill Park Avenue Park Avenue, Whitchurch SY13 1SH, United Kingdom",
+          description: `Name : ${props.name}, Email : ${props.email}, People : ${props.numberGuest}, Remark : ${props.remark} `,
+          start: {
+            dateTime: `${props.reserveDate}T${props.reserveTime}:00.000Z`,
+            timeZone: "Europe/London"
+          },
+          end: {
+            dateTime: `${props.reserveDate}T${props.reserveTime}:00.000Z`,
+            timeZone: "Europe/London"
+          }
+        }
+      })
+      .execute(res => {
+        console.log(res);
       });
   };
 
