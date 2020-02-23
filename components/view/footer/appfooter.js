@@ -4,11 +4,13 @@ import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import Typography from "../../tyrography";
+import Link from "next/Link";
 
 const styles = theme => ({
   root: {
     display: "flex",
-    backgroundColor: "#f09751"
+    backgroundColor: "#f09751",
+    height: "100%"
   },
   container: {
     marginTop: theme.spacing(1),
@@ -52,26 +54,36 @@ const AppFooter = props => {
         <Grid container spacing={3}>
           <Grid item xs={6}>
             <Grid
-              container
-              direction="column"
-              justify="flex-end"
               className={classes.iconsWrapper}
               spacing={3}
-              style={{ alignItems: "center", marginBottom: 15 }}
+              style={{
+                display: "flex",
+                justifyContent: "flex-start",
+                alignItems: "center",
+                marginBottom: 15,
+                marginTop: 10
+              }}
             >
-              Copyright © ThaiVintage {new Date().getFullYear()}
+              Copyright © Thai Vintage Whitchurch {new Date().getFullYear()}
             </Grid>
           </Grid>
           <Grid item xs={6}>
             <Grid
-              container
-              direction="column"
-              justify="flex-end"
               className={classes.iconsWrapper}
               spacing={3}
-              style={{ alignItems: "center", marginBottom: 15 }}
+              style={{
+                display: "flex",
+                justifyContent: "flex-end",
+                alignItems: "center",
+                marginBottom: 15,
+                marginTop: 10
+              }}
             >
-              Magened by Patradanai
+              <Link href="/login">
+                <a style={{ textDecoration: "none", color: "black" }}>
+                  Managed by Patradanai
+                </a>
+              </Link>
             </Grid>
           </Grid>
         </Grid>

@@ -31,8 +31,7 @@ const styles = theme => ({
     },
     [theme.breakpoints.down("sm")]: {
       marginBottom: theme.spacing(1),
-      width: 80,
-      height: 50
+      width: 80
     }
   },
   h5: {
@@ -64,6 +63,15 @@ const styles = theme => ({
       marginBottom: 0,
       fontSize: 30
     }
+  },
+  bottomHeader: {
+    display: "flex",
+    justifyContent: "space-around",
+    alignItems: "center",
+    textAlign: "center",
+    [theme.breakpoints.down("sm")]: {
+      justifyContent: "center"
+    }
   }
 });
 
@@ -87,8 +95,8 @@ const Hero = props => {
         >
           THAI VINTAGE Whitchurch
         </Typography>
-        <div style={{ display: "flex", justifyContent: "space-around" }}>
-          <Grid container>
+        <div className={classes.bottomHeader}>
+          <Grid container spacing={1}>
             <Grid item xs={12} sm={6}>
               <ModalRev
                 name="Book A Table"

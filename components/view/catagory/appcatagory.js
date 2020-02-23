@@ -140,15 +140,20 @@ const AppCatagory = props => {
               <div className={classes.imageBackdrop} />
             </a>
             <div className={classes.imageButton}>
-              <Typography
-                component="h3"
-                variant="h6"
-                color="inherit"
-                className={classes.imageTitle}
+              <a
+                style={{ textDecoration: "none", color: "#ee9200" }}
+                href={payload.link}
               >
-                {payload.title}
-                <div className={classes.imageMarked} />
-              </Typography>
+                <Typography
+                  component="h3"
+                  variant="h6"
+                  color="inherit"
+                  className={classes.imageTitle}
+                >
+                  {payload.title}
+                  <div className={classes.imageMarked} />
+                </Typography>
+              </a>
             </div>
           </ButtonBase>
         ))}
