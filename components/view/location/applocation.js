@@ -66,6 +66,7 @@ const AppLocation = props => {
     <section className={classes.root}>
       <Container className={classes.container}>
         <Typography variant="h5">
+          <span id="location"></span>
           <a
             style={{
               textDecoration: "none",

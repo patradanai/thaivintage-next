@@ -102,7 +102,7 @@ const Nav = props => {
                   {"MENUS"}
                 </Button>
               </Link>
-              <Link href="/location">
+              <Link href="#location">
                 <Button
                   color="primary"
                   size="small"

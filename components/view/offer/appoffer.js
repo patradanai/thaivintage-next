@@ -67,7 +67,7 @@ const styles = theme => ({
 const AppOffer = props => {
   const { classes } = props;
   return (
-    <section className={classes.root}>
+    <section id="contact" className={classes.root}>
       <Container className={classes.container}>
         <div className={classes.backgroundoffer} />
       </Container>

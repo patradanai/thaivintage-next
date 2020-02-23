@@ -12,9 +12,9 @@ import { red } from "@material-ui/core/colors";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 
 const useStyles = makeStyles(theme => ({
-  root: {
+  card: {
     padding: 5,
-    height: 350
+    height: 400
   },
   media: {
     height: 0,
@@ -32,6 +32,9 @@ const useStyles = makeStyles(theme => ({
   },
   avatar: {
     backgroundColor: red[500]
+  },
+  root: {
+    position: "relative"
   }
 }));
 
@@ -39,31 +42,38 @@ export default function RecipeReviewCard(props) {
   const classes = useStyles();
 
   return (
-    <Card className={classes.root}>
-      <CardHeader
-        avatar={
-          <Avatar aria-label="recipe" className={classes.avatar}>
-            T
-          </Avatar>
-        }
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
-        title={props.title}
-      />
-      <CardMedia
-        className={classes.media}
-        image={props.image}
-        title={props.title}
-      />
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          {props.details}
-        </Typography>
-      </CardContent>
-      <CardActions disableSpacing></CardActions>
-    </Card>
+    <div className={classes.root}>
+      <Card className={classes.card}>
+        <CardHeader
+          avatar={
+            <Avatar aria-label="recipe" className={classes.avatar}>
+              T
+            </Avatar>
+          }
+          action={
+            <IconButton aria-label="settings">
+              <MoreVertIcon />
+            </IconButton>
+          }
+          title={props.title}
+        />
+        <CardMedia
+          className={classes.media}
+          image={props.image}
+          title={props.title}
+        />
+        <CardContent style={{ marginBottom: 20 }}>
+          <Typography
+            variant="body2"
+            color="textSecondary"
+            component="p"
+            style={{ marginBottom: 10 }}
+          >
+            {props.details}
+          </Typography>
+        </CardContent>
+        <CardActions disableSpacing></CardActions>
+      </Card>
+    </div>
   );
 }

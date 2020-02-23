@@ -61,7 +61,7 @@ const Contact = props => {
     { url: "/images/twitter.png", title: "twitter", link: "" }
   ];
   return (
-    <section className={classes.root}>
+    <section id="contact" className={classes.root}>
       <Container className={classes.container}>
         <Grid container spacing={5}>
           <Grid item xs={12} sm={4}>
@@ -116,6 +116,8 @@ const Contact = props => {
                 OR
                 <br />
                 SEARCH FOR A BOOKING ONLINE
+                <br />
+                info@thaivintagewhitchurch.co.uk
               </Typography>
             </div>
           </Grid>

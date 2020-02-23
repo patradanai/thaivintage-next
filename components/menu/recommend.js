@@ -44,6 +44,7 @@ const styles = theme => ({
   },
   button: {
     height: 60,
+    fontSize: 14,
     width: "100%",
     border: "1px solid #000",
     [theme.breakpoints.down("sm")]: {
@@ -62,24 +63,26 @@ const RecommendMenu = props => {
     {
       image: "/images/Ala1.png",
       title: "Steamed Sea Bass Lime & Chilli",
-      details: "Steamed Sea Bass fillet with lime & chilli sauce"
+      details:
+        "This spicy Thai-style steamed sea bass is blanketed in garlic and chillies for a flavourful dish that serves any feasting occasion | Thai Vintage Whitchurch"
     },
     {
       image: "/images/Ala2.png",
       title: "Steamed Sea Bass with soy sauce",
       details:
-        "Soft texture Sea Bass fillets with mellow flavoured. Shitake mushroom, spring onion, ginger and light soy sauce."
+        "Soft texture Sea Bass fillets with mellow flavoured. Shitake mushroom, spring onion, ginger and light soy sauce. | Thai Vintage Whitchurch"
     },
     {
       image: "/images/Ala3.png",
       title: "Crispy Sea Bass with Mango salad",
-      details: "Crispy fried Sea Bass fillet with Thai herbs and mango salad."
+      details:
+        "Crispy fried Sea Bass fillet with Thai herbs and mango salad. | Thai Vintage Whitchurch"
     },
     {
       image: "/images/Ala4.png",
       title: "Lamb cutlets Pad Cha",
       details:
-        "with aromatic spice from various Thai herbs (Kra chai, fresh peppercorn, lime leaves) "
+        "with aromatic spice from various Thai herbs (Kra chai, fresh peppercorn, lime leaves) | Thai Vintage Whitchurch "
     }
   ];
 
@@ -113,6 +116,7 @@ const RecommendMenu = props => {
         </Grid>
         <Typography variant="h4" className={classes.title}>
           Our Menus
+          <Typography variant="body1">Thai Vintage Whitchurch</Typography>
         </Typography>
         <div className={classes.menu}>
           <ButtonGroup
