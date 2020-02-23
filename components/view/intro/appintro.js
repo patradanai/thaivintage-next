@@ -13,46 +13,45 @@ const styles = theme => ({
     position: "relative",
     //overflow: "hidden",
     alignItems: "center",
-    backgroundColor: "#f09751 !important",
+    backgroundColor: "#f09751",
     [theme.breakpoints.down("sm")]: {
       overflow: "hidden"
     }
   },
   image: {
-    pointerEvents: "none",
-    position: "absolute",
-    opacity: 0.5,
-    [theme.breakpoints.up("sm")]: {
-      height: "66vh",
-      minHeight: 450,
-      maxHeight: 1300
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: theme.spacing(9),
+    [theme.breakpoints.down("sm")]: {
+      overflow: "hidden",
+      marginTop: theme.spacing(3)
     }
   },
   container: {
     display: "flex",
     position: "relative"
   },
-  gridStory: {
-    backgroundColor: "white"
-  },
   item: {
     display: "flex",
     flexDirection: "column",
+    justifyContent: "center",
     alignItems: "left",
     fontSize: 15,
     fontWeight: 500,
     lineHeight: "27px"
   },
   title: {
+    display: "flex",
     fontSize: 70,
     fontWeight: 700,
     color: "#000",
-    textAlign: "right",
+    justifyContent: "flex-end",
     marginTop: theme.spacing(5),
     marginBottom: theme.spacing(2),
     [theme.breakpoints.down("sm")]: {
-      textAlign: "center",
-      fontSize: 70
+      justifyContent: "center",
+      fontSize: 50
     }
   },
   subtitle: {
@@ -84,22 +83,23 @@ const AppIntro = props => {
         <Container className={classes.container}>
           <Grid container spacing={5}>
             <Grid item xs={12} md={6}>
-              <div className={classes.item}>
+              <div className={classes.image}>
                 <img
                   src="/images/Ala5.png"
                   style={{
-                    marginTop: "80px",
-                    marginBottom: "80px"
+                    arginBottom: "80px"
                   }}
                 />
               </div>
             </Grid>
             <Grid className={classes.gridStory} item xs={12} sm={6}>
               <div className={classes.item}>
-                <div className={clsx(classes.title, "titleStory")}>
-                  <div style={{ marginRight: 20 }}>
-                    Our <p>Story</p>
-                  </div>
+                <div className={classes.title}>
+                  <Typography variant="h2">
+                    <div className="titleStory" style={{ textAlign: "center" }}>
+                      Our <p>Story</p>
+                    </div>
+                  </Typography>
                 </div>
                 <Typography className={classes.subtitle} variant="subtitle1">
                   Thai Vintage Whitchurch
