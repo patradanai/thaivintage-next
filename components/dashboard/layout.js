@@ -352,6 +352,7 @@ export default function Dashboard(props) {
                         variant="contained"
                         color="secondary"
                         style={{ marginTop: 50 }}
+                        onClick={handleAuthSignIn}
                       >
                         Login Google
                       </Button>

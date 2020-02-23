@@ -4,7 +4,7 @@ import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import Typography from "../../tyrography";
-import Link from "next/Link";
+import Link from "next/link";
 
 const styles = theme => ({
   root: {

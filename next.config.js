@@ -9,6 +9,5 @@ module.exports = {
     }, {});
     config.plugins.push(new webpack.DefinePlugin(env));
     return config;
-  },
-  distDir: './functions/next'
+  }
 };

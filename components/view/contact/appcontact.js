@@ -61,7 +61,7 @@ const Contact = props => {
     { url: "/images/twitter.png", title: "twitter", link: "" }
   ];
   return (
-    <section id="contact" className={classes.root}>
+    <section className={classes.root}>
       <Container className={classes.container}>
         <Grid container spacing={5}>
           <Grid item xs={12} sm={4}>

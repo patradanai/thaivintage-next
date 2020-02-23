@@ -134,11 +134,13 @@ export default function FormDialog(props) {
           <Complete close={handleClose} />
         ) : (
           <div>
-            <DialogTitle id="form-dialog-title">Booking Details</DialogTitle>
+            <DialogTitle id="form-dialog-title">BOOK A TABLE</DialogTitle>
             <DialogContent dividers>
               <DialogContentText>
-                To subscribe to this website, please enter your email address
-                here. We will send updates occasionally.
+                A selection of our larger tables is available to book online,
+                however if you would like to reserve a table for six people or
+                more, we recommend calling our reservation team directly. Please
+                call the restaurant on +44 1948 661800
               </DialogContentText>
               <form className={classes.root} onSubmit={handleSavetoDB}>
                 <Grid container spacing={0}>

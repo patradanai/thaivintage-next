@@ -68,7 +68,6 @@ const ReserveDialogs = props => {
   const handleClickOpen = event => {
     event.preventDefault();
     setOpen(true);
-    insertCalendar();
   };
   const handleClose = event => {
     event.preventDefault();
@@ -96,6 +95,9 @@ const ReserveDialogs = props => {
           dateReserve: props.reserveTime
         });
       })
+      .then(() => {
+        insertCalendar();
+      })
       .catch(err => {
         console.log(err);
       });
@@ -122,8 +124,11 @@ const ReserveDialogs = props => {
           }
         }
       })
-      .execute(res => {
+      .then(res => {
         console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
       });
   };
 
