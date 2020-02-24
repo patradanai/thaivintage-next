@@ -25,7 +25,7 @@ const MapGoogle = props => {
           opacity: "0.5"
         }}
       >
-        <div>ThaiVintage Restaurant</div>
+        <div>Thai Vintage Whitchurch</div>
       </MarkerWithLabel>
     </GoogleMap>
   );
