@@ -197,11 +197,11 @@ const ReserveDashboard = props => {
     if (data.length > 0) {
       search = data.filter(data => {
         return (
-          data.name.includes(searchValue) ||
-          data.email.includes(searchValue) ||
-          data.contact.includes(searchValue) ||
-          data.reserveDate.includes(searchValue) ||
-          data.reserveTime.includes(searchValue)
+          data.name.toLowerCase().includes(searchValue.toLowerCase()) ||
+          data.email.toLowerCase().includes(searchValue.toLowerCase()) ||
+          data.contact.toLowerCase().includes(searchValue.toLowerCase()) ||
+          data.reserveDate.toLowerCase().includes(searchValue.toLowerCase()) ||
+          data.reserveTime.toLowerCase().includes(searchValue.toLowerCase())
         );
       });
     }
