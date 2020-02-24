@@ -17,7 +17,7 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "../../tyrography";
 import { loadDBFirebase } from "../../../lib/firebase";
 import axios from "axios";
-import moment from "moment";
+import { useSnackbar } from "notistack";
 
 const styles = theme => ({
   root: {
@@ -65,6 +65,13 @@ const DialogActions = withStyles(theme => ({
 
 const ReserveDialogs = props => {
   const [open, setOpen] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
+
+  const handleClickVariant = (variant, data) => {
+    // variant could be success, error, warning, info, or default
+    enqueueSnackbar(`SUCCESS ${data}`, { variant });
+  };
+
   const handleClickOpen = event => {
     event.preventDefault();
     setOpen(true);
@@ -72,6 +79,7 @@ const ReserveDialogs = props => {
   const handleClose = event => {
     event.preventDefault();
     setOpen(false);
+    handleClickVariant(`warning`, "| not use");
   };
 
   const updateFirebase = async event => {
@@ -96,10 +104,13 @@ const ReserveDialogs = props => {
         });
       })
       .then(() => {
+        handleClickVariant("success", "ACCEPT & EMAIL");
+      })
+      .then(() => {
         insertCalendar();
       })
       .catch(err => {
-        console.log(err);
+        handleClickVariant("error", "ERROR SYSTEM");
       });
   };
 
@@ -125,10 +136,10 @@ const ReserveDialogs = props => {
         }
       })
       .then(res => {
-        console.log(res);
+        handleClickVariant("success", "ADD CALENDAR");
       })
       .catch(err => {
-        console.log(err);
+        handleClickVariant("error", "ERROR ADD CALENDAR");
       });
   };
 
