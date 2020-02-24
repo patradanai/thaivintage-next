@@ -25,7 +25,7 @@ function Copyright() {
   );
 }
 
-const logo = "/images/logo.png";
+const logo = "/images/thaivintagewhitchurch-logo.png";
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -77,7 +77,7 @@ const SignIn = () => {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <img src={logo} className={classes.logo} />
+        <img src={logo} className={classes.logo} alt="thaivintagewhitchurch" />
         <Typography component="h1" variant="h5">
           Thai Vintage Whitchurch
         </Typography>

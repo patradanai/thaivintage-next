@@ -52,39 +52,37 @@ const AppFooter = props => {
     <Typography component="footer" className={classes.root}>
       <Container className={classes.container}>
         <Grid container spacing={3}>
-          <Grid item xs={6}>
-            <Grid
-              className={classes.iconsWrapper}
-              spacing={3}
-              style={{
-                display: "flex",
-                justifyContent: "flex-start",
-                alignItems: "center",
-                marginBottom: 15,
-                marginTop: 10
-              }}
-            >
-              Copyright © Thai Vintage Whitchurch {new Date().getFullYear()}
-            </Grid>
+          <Grid
+            item
+            xs={6}
+            className={classes.iconsWrapper}
+            style={{
+              display: "flex",
+              justifyContent: "flex-start",
+              alignItems: "center",
+              marginBottom: 15,
+              marginTop: 10
+            }}
+          >
+            Copyright © Thai Vintage Whitchurch {new Date().getFullYear()}
           </Grid>
-          <Grid item xs={6}>
-            <Grid
-              className={classes.iconsWrapper}
-              spacing={3}
-              style={{
-                display: "flex",
-                justifyContent: "flex-end",
-                alignItems: "center",
-                marginBottom: 15,
-                marginTop: 10
-              }}
-            >
-              <Link href="/login">
-                <a style={{ textDecoration: "none", color: "black" }}>
-                  Managed by Patradanai
-                </a>
-              </Link>
-            </Grid>
+          <Grid
+            item
+            xs={6}
+            className={classes.iconsWrapper}
+            style={{
+              display: "flex",
+              justifyContent: "flex-end",
+              alignItems: "center",
+              marginBottom: 15,
+              marginTop: 10
+            }}
+          >
+            <Link href="/login">
+              <a style={{ textDecoration: "none", color: "black" }}>
+                Managed by Patradanai
+              </a>
+            </Link>
           </Grid>
         </Grid>
       </Container>

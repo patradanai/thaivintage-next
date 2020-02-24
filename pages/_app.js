@@ -6,7 +6,6 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import theme from "../src/theme";
 import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-
 export default class MyApp extends App {
   componentDidMount() {
     // Remove the server-side injected CSS.

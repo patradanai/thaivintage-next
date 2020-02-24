@@ -2,7 +2,6 @@ import React from "react";
 import Layout from "../components/layout";
 import { withStyles } from "@material-ui/core/styles";
 import HeroSub from "../components/herosub";
-import { Container } from "@material-ui/core";
 import Recommend from "../components/menu/recommend";
 const styles = theme => ({
   container: {

@@ -61,25 +61,28 @@ const RecommendMenu = props => {
 
   const recommend = [
     {
-      image: "/images/Ala1.png",
+      image:
+        "/images/thaivintagewhitchurch-thai-cuisine-steamed-sea-bass-lime-chilli.jpg",
       title: "Steamed Sea Bass Lime & Chilli",
       details:
         "This spicy Thai-style steamed sea bass is blanketed in garlic and chillies for a flavourful dish that serves any feasting occasion | Thai Vintage Whitchurch"
     },
     {
-      image: "/images/Ala2.png",
+      image:
+        "/images/thaivintagewhitchurch-thai-cuisine-steamed-sea-bass-soy-sauce.jpg",
       title: "Steamed Sea Bass with soy sauce",
       details:
         "Soft texture Sea Bass fillets with mellow flavoured. Shitake mushroom, spring onion, ginger and light soy sauce. | Thai Vintage Whitchurch"
     },
     {
-      image: "/images/Ala3.png",
+      image:
+        "/images/thaivintagewhitchurch-thai-cuisine-crispy-sea-mango-salad.jpg",
       title: "Crispy Sea Bass with Mango salad",
       details:
         "Crispy fried Sea Bass fillet with Thai herbs and mango salad. | Thai Vintage Whitchurch"
     },
     {
-      image: "/images/Ala4.png",
+      image: "/images/thaivintagewhitchurch-thai-lamb-cutlets-pad-cha.jpg",
       title: "Lamb cutlets Pad Cha",
       details:
         "with aromatic spice from various Thai herbs (Kra chai, fresh peppercorn, lime leaves) | Thai Vintage Whitchurch "

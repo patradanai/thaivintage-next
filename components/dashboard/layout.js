@@ -304,7 +304,8 @@ export default function Dashboard(props) {
         {flagDraw ? (
           <div className={classes.imageDraw}>
             <img
-              src="/images/logo.png"
+              src="/images/thaivintagewhitchurch-logo.png"
+              alt="thaivintagewhitchurch-logo"
               style={{
                 width: 120,
                 height: 120,

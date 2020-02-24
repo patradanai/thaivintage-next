@@ -1,11 +1,11 @@
 import React from "react";
-import clsx from "clsx";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import Typography from "../../tyrography";
-import Hidden from "@material-ui/core/Hidden";
+
+const image = "/images/thaivintagewhitchurch-thai-curry.png";
 
 const styles = theme => ({
   root: {
@@ -85,7 +85,8 @@ const AppIntro = props => {
             <Grid item xs={12} md={6}>
               <div className={classes.image}>
                 <img
-                  src="/images/Ala5.png"
+                  src={image}
+                  alt="thaivintagewhitchurch-thai-curry"
                   style={{
                     arginBottom: "80px"
                   }}

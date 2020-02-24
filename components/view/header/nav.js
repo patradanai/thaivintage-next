@@ -14,7 +14,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Container from "@material-ui/core/Container";
 import ModalRev from "../../reservation/modalrev";
 
-const logo = "/images/logo.png";
+const logo = "/images/thaivintagewhitchurch-logo.png";
 
 const styles = theme => ({
   title: {
@@ -120,7 +120,7 @@ const Nav = props => {
                   {"GALLERY"}
                 </Button>
               </Link>
-              <Link href="">
+              <Link href="/about">
                 <Button
                   color="primary"
                   size="small"
@@ -141,7 +141,11 @@ const Nav = props => {
             </div>
           </Hidden>
           <Link href="/">
-            <img src={logo} className={classes.imageSrc} />
+            <img
+              src={logo}
+              className={classes.imageSrc}
+              alt="thaivintagewhitchurch"
+            />
           </Link>
           <div className={classes.right}>
             <ModalRev name="Book a Table" class={classes.rightLink} />
@@ -180,13 +184,11 @@ const Nav = props => {
                 </a>
               </MenuItem>
               <MenuItem onClick={handleClose}>
-                <a
-                  onClick={() => {
-                    Router.push("/location");
-                  }}
-                >
-                  LOCATION
-                </a>
+                <Link href="#location">
+                  <a style={{ textDecoration: "none", color: "#000" }}>
+                    LOCATION
+                  </a>
+                </Link>
               </MenuItem>
               <MenuItem onClick={handleClose}>
                 <a
@@ -197,15 +199,21 @@ const Nav = props => {
                   GALLERY
                 </a>
               </MenuItem>
-              <MenuItem onClick={handleClose}>ABOUT</MenuItem>
               <MenuItem onClick={handleClose}>
                 <a
                   onClick={() => {
-                    Router.push("/contact");
+                    Router.push("/about");
                   }}
                 >
-                  CONTACT US
+                  ABOUT
                 </a>
+              </MenuItem>
+              <MenuItem onClick={handleClose}>
+                <Link href="#contact">
+                  <a style={{ textDecoration: "none", color: "#000" }}>
+                    CONTACT US
+                  </a>
+                </Link>
               </MenuItem>
             </Menu>
           </Hidden>

@@ -5,7 +5,8 @@ import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import Typography from "../../tyrography";
 
-const background = "/images/1491928.png";
+const background =
+  "/images/thaivintagewhitchurch-thai-cuisin-coffee-vegetable.png";
 
 const styles = theme => ({
   root: {
@@ -70,6 +71,11 @@ const AppOffer = props => {
     <section id="contact" className={classes.root}>
       <Container className={classes.container}>
         <div className={classes.backgroundoffer} />
+        <img
+          src={background}
+          style={{ display: "none" }}
+          alt="thaivintagewhitchurch-thai-cuisin-coffee-vegetable"
+        />
       </Container>
     </section>
   );

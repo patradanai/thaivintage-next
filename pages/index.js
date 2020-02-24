@@ -3,7 +3,6 @@ import Layout from "../components/layout";
 import Hero from "../components/view/header/hero";
 import Intro from "../components/view/intro/appintro";
 import Catagory from "../components/view/catagory/appcatagory";
-import { loadDBFirebase } from "../lib/firebase";
 
 const Home = props => {
   return (

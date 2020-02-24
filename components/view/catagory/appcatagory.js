@@ -42,6 +42,7 @@ const styles = theme => ({
   },
   imageSrc: {
     position: "absolute",
+    overflow: "hidden",
     left: 0,
     right: 0,
     top: 0,
@@ -79,37 +80,43 @@ const AppCatagory = props => {
 
   const images = [
     {
-      url: "/images/Ala5.png",
+      url: "/images/thaivintagewhitchurch-thai-curry.png",
+      alt: "thaivintagewhitchurch-thai-curry",
       title: "A LA CARTE MENU",
       width: "40%",
       link: "/menus/ALACARTE.pdf"
     },
     {
-      url: "/images/Drink2.png",
+      url: "/images/thaivintagewhitchurch-thai-cuisin-drinking.png",
+      alt: "thaivintagewhitchurch-thai-cuisin-drinking",
       title: "Drinking",
-      width: "20%",
+      width: "30%",
       link: "/menus/DRINKING.pdf"
     },
     {
-      url: "/images/set3.png",
+      url: "/images/thaivintagewhitchurch-thai-cuisin-setmenu.png",
+      alt: "thaivintagewhitchurch-thai-cuisin-setmenu",
       title: "LUNCH&SET MENU",
-      width: "40%",
+      width: "30%",
       link: "/menus/SETMENU.pdf"
     },
     {
-      url: "/images/kidset3.png",
+      url: "/images/thaivintagewhitchurch-thai-cuisin-setmenu-kid.png",
+      alt: "thaivintagewhitchurch-thai-cuisin-setmenu-kid",
       title: "KIDS MENU",
       width: "38%",
       link: "/menus/KIDSMENU.pdf"
     },
     {
-      url: "/images/dessert1.png",
+      url: "/images/thaivintagewhitchurch-thai-cuisin-dessert.png",
+      alt: "thaivintagewhitchurch-thai-cuisin-dessert",
       title: "DESSERT MENU",
       width: "38%",
       link: "/menus/DESSERTS&COFFEE.pdf"
     },
     {
-      url: "/images/tea1.png",
+      url: "/images/thaivintagewhitchurch-thai-cuisin-coffee-tea.png",
+      alt: "thaivintagewhitchurch-thai-cuisin-coffee-tea",
       title: "COFFEE AND TEA",
       width: "24%",
       link: "/menus/DESSERTS&COFFEE.pdf"
@@ -131,10 +138,12 @@ const AppCatagory = props => {
           >
             <div
               className={classes.imageSrc}
-              style={{
-                backgroundImage: `url(${payload.url})`
-              }}
-            />
+              // style={{
+              //   backgroundImage: `url(${payload.url})`
+              // }}
+            >
+              <img src={payload.url} alt={payload.alt}></img>
+            </div>
 
             <a href={payload.link}>
               <div className={classes.imageBackdrop} />

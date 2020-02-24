@@ -8,7 +8,7 @@ import Button from "../../button";
 import ModalRev from "../../reservation/modalrev";
 import { Grid } from "@material-ui/core";
 
-const backgroundImage = "/images/1492020.png";
+const backgroundImage = "/images/thaivintagewhitchurch-thai-cuisine.png";
 
 const styles = theme => ({
   background: {
@@ -84,7 +84,7 @@ const Hero = props => {
         <img
           style={{ display: "none" }}
           src={backgroundImage}
-          alt="increase priority"
+          alt="thaivintagewhitchurch-thai-cuisine"
         />
         <div className={clsx(classes.welcomeTitle, "welcome")}>Welcome to</div>
         <Typography

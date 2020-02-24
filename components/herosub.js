@@ -5,7 +5,8 @@ import { withStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Typography from "../components/tyrography";
 
-const backgroundImage = "/images/1491917.png";
+const backgroundImage =
+  "/images/thaivintagewhitchurch-thai-cuisin-coffee-vegetable-food.png";
 
 const styles = theme => ({
   root: {
@@ -68,7 +69,11 @@ const HeroSub = props => {
   const { classes } = props;
   return (
     <section className={classes.root}>
-      <img src={backgroundImage} style={{ display: "None" }} />
+      <img
+        src={backgroundImage}
+        style={{ display: "None" }}
+        alt="thaivintagewhitchurch-thai-cuisin-coffee-vegetable-food"
+      />
       <div className={classes.backdrop} />
       <div className={clsx(classes.backgroundhero, classes.imagebackground)} />
       <Container className={classes.container}>
