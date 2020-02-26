@@ -34,7 +34,8 @@ const DashboardPage = props => {
                 : data.data().confirm === "waiting"
                 ? "Waiting"
                 : "Canceled",
-            request: data.data().request
+            request: data.data().request,
+            calendar: data.data().calendarId
           });
         });
         const mergeList = [...reserved, ...updateList];
@@ -65,7 +66,8 @@ const DashboardPage = props => {
             : data.confirm === "waiting"
             ? "Waiting Confirm"
             : "Cancel",
-        request: data.request
+        request: data.request,
+        calendar: data.calendarId
       })
     );
     setReserved(updateList);

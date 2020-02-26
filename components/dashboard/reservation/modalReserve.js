@@ -143,7 +143,7 @@ const ReserveDialogs = props => {
       .delete({
         calendarId:
           "thaivintagewhitchurch.co.uk_ert6u9r95pcadm2d73fsr1f78k@group.calendar.google.com",
-        eventId: "fkdvmijscf5ti37koe32tiqiro"
+        eventId: props.calendar
       })
       .then(res => {
         handleClickVariant("warning", "| DELETED");
