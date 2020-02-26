@@ -46,6 +46,7 @@ const styles = theme => ({
     height: 60,
     fontSize: 14,
     width: "100%",
+    padding: 20,
     border: "1px solid #000",
     [theme.breakpoints.down("sm")]: {
       marginRight: theme.spacing(1)
@@ -107,7 +108,7 @@ const RecommendMenu = props => {
         </Typography>
         <Grid container spacing={3}>
           {recommend.map((payload, index) => (
-            <Grid item sm={3} key={index}>
+            <Grid item xs={12} md={3} key={index}>
               <Card
                 image={payload.image}
                 title={payload.title}

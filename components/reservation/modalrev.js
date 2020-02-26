@@ -81,7 +81,7 @@ export default function FormDialog(props) {
         time: selectedTime,
         people: people,
         request: request,
-        confirm: false
+        confirm: "waiting"
       })
       .then(ref => {
         console.log("Document written with ID: ", ref.id);

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
 import Router from "next/router";
 import PropTypes from "prop-types";
@@ -157,7 +157,7 @@ const Nav = props => {
               Take AWAY
             </Button>
           </div>
-          <Hidden smUp>
+          <Hidden mdUp>
             <IconButton
               edge="start"
               className={classes.menuButton}

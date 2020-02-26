@@ -39,7 +39,8 @@ const styles = theme => ({
     alignItems: "left",
     fontSize: 15,
     fontWeight: 500,
-    lineHeight: "27px"
+    lineHeight: "27px",
+    marginBottom: theme.spacing(2)
   },
   title: {
     display: "flex",
@@ -93,7 +94,7 @@ const AppIntro = props => {
                 />
               </div>
             </Grid>
-            <Grid className={classes.gridStory} item xs={12} sm={6}>
+            <Grid className={classes.gridStory} item xs={12} md={6}>
               <div className={classes.item}>
                 <div className={classes.title}>
                   <Typography variant="h2">
@@ -106,15 +107,17 @@ const AppIntro = props => {
                   Thai Vintage Whitchurch
                 </Typography>
                 <Typography variant="h5" className={classes.item}>
-                  Bringing Ancient Thai Food to Whitchurch. We welcome you to
-                  the Thai Vintage Restaurant. Tempted by an unrivaled range of
-                  authentic & imaginative fusion dishes. Our food is freshly
-                  prepared to the highest standards using only the best quality
-                  natural, freshest ingredients. No ghee, full fat dairy,
-                  processed meats, artificial colours or flavours are used. We
-                  only cook with sparing amounts of sunflower & olive oils and
-                  only use fresh chicken breast & the best cuts of meat. We are
-                  the healthy Thai takeaway!
+                  <pre-line>
+                    Bringing Ancient Thai Food to Whitchurch. We welcome you to
+                    the Thai Vintage Restaurant. Tempted by an unrivaled range
+                    of authentic & imaginative fusion dishes. Our food is
+                    freshly prepared to the highest standards using only the
+                    best quality natural, freshest ingredients. No ghee, full
+                    fat dairy, processed meats, artificial colours or flavours
+                    are used. We only cook with sparing amounts of sunflower &
+                    olive oils and only use fresh chicken breast & the best cuts
+                    of meat. We are the healthy Thai takeaway!
+                  </pre-line>
                 </Typography>
               </div>
             </Grid>

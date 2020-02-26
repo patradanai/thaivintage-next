@@ -79,7 +79,6 @@ const ReserveDialogs = props => {
   const handleClose = event => {
     event.preventDefault();
     setOpen(false);
-    handleClickVariant(`warning`, "| not use");
   };
 
   const updateFirebase = async event => {
@@ -87,35 +86,9 @@ const ReserveDialogs = props => {
     firebaseConfirm();
   };
 
+  // Add Calendar and Confirm
   const firebaseConfirm = async () => {
     const firebase = await loadDBFirebase();
-    firebase
-      .firestore()
-      .collection("reservation")
-      .doc(props.id)
-      .update({ confirm: true })
-      .then(res => {
-        axios.post("https://thaivintagewhitchurch-268910.appspot.com/api", {
-          email: props.email,
-          name: props.name,
-          people: props.numberGuest,
-          timeReserve: props.reserveDate,
-          dateReserve: props.reserveTime
-        });
-      })
-      .then(() => {
-        handleClickVariant("success", "ACCEPT & EMAIL");
-      })
-      .then(() => {
-        insertCalendar();
-      })
-      .catch(err => {
-        handleClickVariant("error", "ERROR SYSTEM");
-      });
-  };
-
-  // Insert to Google Calendar
-  const insertCalendar = () => {
     gapi.client.calendar.events
       .insert({
         calendarId:
@@ -137,9 +110,54 @@ const ReserveDialogs = props => {
       })
       .then(res => {
         handleClickVariant("success", "ADD CALENDAR");
+        firebase
+          .firestore()
+          .collection("reservation")
+          .doc(props.id)
+          .update({ confirm: "confirm", calendarId: res.result["id"] })
+          .then(res => {
+            axios.post("https://thaivintagewhitchurch-268910.appspot.com/api", {
+              email: props.email,
+              name: props.name,
+              people: props.numberGuest,
+              timeReserve: props.reserveDate,
+              dateReserve: props.reserveTime
+            });
+          })
+          .then(() => {
+            handleClickVariant("success", "ACCEPT & EMAIL");
+          })
+          .catch(err => {
+            handleClickVariant("error", "ERROR SYSTEM");
+          });
       })
       .catch(err => {
         handleClickVariant("error", "ERROR ADD CALENDAR");
+      });
+  };
+
+  // Deleted Calendar
+  const deleteCalendar = async () => {
+    const firebase = await loadDBFirebase();
+    gapi.client.calendar.events
+      .delete({
+        calendarId:
+          "thaivintagewhitchurch.co.uk_ert6u9r95pcadm2d73fsr1f78k@group.calendar.google.com",
+        eventId: "fkdvmijscf5ti37koe32tiqiro"
+      })
+      .then(res => {
+        handleClickVariant("warning", "| DELETED");
+        firebase
+          .firestore()
+          .collection("reservation")
+          .doc(props.id)
+          .update({ confirm: "cancel" })
+          .then(() => {
+            handleClickVariant("success", "CANCEL A RESERVED");
+          })
+          .catch(err => {
+            handleClickVariant("error", "ERROR SYSTEM");
+          });
       });
   };
 
@@ -208,7 +226,7 @@ const ReserveDialogs = props => {
           </TableContainer>
         </DialogContent>
         <DialogActions>
-          {props.reserveStatus !== "Confirmed" ? (
+          {props.reserveStatus === "Waiting" ? (
             <div>
               <Button
                 autoFocus
@@ -223,11 +241,11 @@ const ReserveDialogs = props => {
                 Accept
               </Button>
             </div>
-          ) : (
+          ) : props.reserveStatus === "Confirmed" ? (
             <div>
               <Button
                 autoFocus
-                onClick={handleClose}
+                onClick={deleteCalendar}
                 variant="outlined"
                 color="primary"
                 style={{
@@ -238,7 +256,7 @@ const ReserveDialogs = props => {
                 Cancel Reserve
               </Button>
             </div>
-          )}
+          ) : null}
         </DialogActions>
       </Dialog>
     </div>

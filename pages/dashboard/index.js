@@ -28,9 +28,12 @@ const DashboardPage = props => {
             ),
             reserveTime: data.data().time,
             promotion: "",
-            reserveStatus: data.data().confirm
-              ? "Confirmed"
-              : "Waiting Confirm",
+            reserveStatus:
+              data.data().confirm === "confirm"
+                ? "Confirmed"
+                : data.data().confirm === "waiting"
+                ? "Waiting"
+                : "Canceled",
             request: data.data().request
           });
         });
@@ -56,7 +59,12 @@ const DashboardPage = props => {
         reserveDate: moment(data.date.seconds, "X").format("YYYY-MM-DD"),
         reserveTime: data.time,
         promotion: "",
-        reserveStatus: data.confirm ? "Confirmed" : "Waiting Confirm",
+        reserveStatus:
+          data.confirm === "confirm"
+            ? "Confirmed"
+            : data.confirm === "waiting"
+            ? "Waiting Confirm"
+            : "Cancel",
         request: data.request
       })
     );

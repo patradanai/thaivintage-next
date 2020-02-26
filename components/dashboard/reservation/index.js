@@ -6,7 +6,6 @@ import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import { Consumer } from "../../../pages/dashboard/index";
 import Typrography from "../../tyrography";
 import TablePagination from "@material-ui/core/TablePagination";
 import Paper from "@material-ui/core/Paper";
@@ -47,7 +46,7 @@ const StyledTableRow = withStyles(theme => ({
 
 const useStyles = makeStyles(theme => ({
   table: {
-    minWidth: 750
+    width: 1280
   },
   form: {
     "& > *": {
@@ -416,7 +415,9 @@ const ReserveDashboard = props => {
                       {row.reserveTime}
                     </StyledTableCell>
                     <StyledTableCell align="right">
-                      {row.reserveStatus}
+                      <Button variant="outlined" disabled>
+                        {row.reserveStatus}
+                      </Button>
                     </StyledTableCell>
                   </StyledTableRow>
                 ))}

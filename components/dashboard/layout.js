@@ -236,27 +236,6 @@ export default function Dashboard(props) {
     setFlagDraw(false);
   };
 
-  const listComingEvent = () => {
-    gapi.client.calendar.events
-      .list({
-        calendarId:
-          "thaivintagewhitchurch.co.uk_ert6u9r95pcadm2d73fsr1f78k@group.calendar.google.com",
-        timeMin: new Date().toISOString(),
-        showDeleted: false,
-        singleEvents: true,
-        maxResults: 10,
-        orderBy: "startTime"
-      })
-      .then(res => {
-        const event = res.result.items;
-        if (event.length > 0) {
-          console.log(event);
-        } else {
-          console.log("No event Coming");
-        }
-      });
-  };
-
   return (
     <div className={classes.root}>
       <CssBaseline />

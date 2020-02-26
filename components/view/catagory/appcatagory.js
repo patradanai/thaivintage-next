@@ -20,9 +20,9 @@ const styles = theme => ({
     display: "block",
     padding: 0,
     borderRadius: 0,
-    height: "40vh",
+    height: "350px",
     color: "#ee9200",
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("md")]: {
       width: "100% !important",
       height: 100
     },
@@ -72,6 +72,13 @@ const styles = theme => ({
     bottom: -2,
     left: "calc(50% - 9px)",
     transition: theme.transitions.create("opacity")
+  },
+  imageShow: {
+    width: "100%",
+    height: "100",
+    [theme.breakpoints.up("md")]: {
+      height: "350px"
+    }
   }
 });
 
@@ -142,7 +149,11 @@ const AppCatagory = props => {
               //   backgroundImage: `url(${payload.url})`
               // }}
             >
-              <img src={payload.url} alt={payload.alt}></img>
+              <img
+                src={payload.url}
+                alt={payload.alt}
+                className={classes.imageShow}
+              />
             </div>
 
             <a href={payload.link}>
