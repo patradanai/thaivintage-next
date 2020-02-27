@@ -4,6 +4,7 @@ import Contact from "../components/view/contact/appcontact";
 import Offer from "../components/view/offer/appoffer";
 import Footer from "../components/view/footer/appfooter";
 import Location from "../components/view/location/applocation";
+import MessengerCustomerChat from "react-messenger-customer-chat";
 
 const Layout = props => {
   return (
@@ -15,6 +16,10 @@ const Layout = props => {
         <Contact />
         <Location />
         <Footer />
+        <MessengerCustomerChat
+          pageId="100411281542289"
+          appId="505910363635859"
+        />
       </div>
       <style jsx>{`
         .Site {

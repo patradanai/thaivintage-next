@@ -9,7 +9,7 @@ export default class MyDocument extends Document {
       <html lang="en">
         <Head>
           <script src="https://apis.google.com/js/api.js" />
-          <link rel="shortcut icon" href="/icon.ico" />
+          <link rel="shortcut icon" href="/favicon.ico" />
           {/* PWA primary color */}
           <meta name="theme-color" content={theme.palette.primary.main} />
           <link
