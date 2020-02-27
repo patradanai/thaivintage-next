@@ -7,7 +7,10 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import theme from "../src/theme";
 import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-export default class MyApp extends App {
+import Router from "next/router";
+import withGA from "next-ga";
+
+class MyApp extends App {
   componentDidMount() {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector("#jss-server-side");
@@ -39,3 +42,5 @@ export default class MyApp extends App {
     );
   }
 }
+
+export default withGA("UA-159054916-1", Router)(MyApp);
