@@ -7,8 +7,8 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import theme from "../src/theme";
 import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import Router from "next/router";
-import withGA from "next-ga";
+// import Router from "next/router";
+// import withGA from "next-ga";
 
 class MyApp extends App {
   componentDidMount() {
@@ -43,4 +43,6 @@ class MyApp extends App {
   }
 }
 
-export default withGA("UA-159054916-1", Router)(MyApp);
+export default MyApp;
+
+// withGA("UA-159054916-1", Router)

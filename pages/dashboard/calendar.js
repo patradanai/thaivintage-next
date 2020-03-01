@@ -20,10 +20,8 @@ const CalendarContent = () => {
       .list({
         calendarId:
           "thaivintagewhitchurch.co.uk_ert6u9r95pcadm2d73fsr1f78k@group.calendar.google.com",
-        timeMin: new Date().toISOString(),
         showDeleted: false,
         singleEvents: true,
-        maxResults: 10,
         orderBy: "startTime"
       })
       .then(res => {

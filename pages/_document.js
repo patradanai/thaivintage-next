@@ -3,11 +3,27 @@ import Document, { Head, Main, NextScript } from "next/document";
 import { ServerStyleSheets } from "@material-ui/core/styles";
 import theme from "../src/theme";
 
+const GA_TRACKING_ID = "UA-159054916-1";
+
 export default class MyDocument extends Document {
   render() {
     return (
       <html lang="en">
         <Head>
+          <script
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+          />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments)};
+                gtag('js', new Date());
+                gtag('config', '${GA_TRACKING_ID}');
+              `
+            }}
+          />
           <script src="https://apis.google.com/js/api.js" />
           <link rel="shortcut icon" href="/favicon.ico" />
           {/* PWA primary color */}
