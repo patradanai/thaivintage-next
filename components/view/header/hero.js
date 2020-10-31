@@ -10,11 +10,11 @@ import { Grid } from "@material-ui/core";
 
 const backgroundImage = "/images/thaivintagewhitchurch-thai-cuisine.png";
 
-const styles = theme => ({
+const styles = (theme) => ({
   background: {
     backgroundImage: `url(${backgroundImage})`,
     backgroundColor: "#7fc7d9", // Average color of the background image.
-    backgroundPosition: "center"
+    backgroundPosition: "center",
   },
   button: {
     color: "#000",
@@ -27,22 +27,22 @@ const styles = theme => ({
     border: "1px solid #ff671f",
     "&:hover": {
       border: "1px solid #ff671f",
-      backgroundColor: "#fff"
+      backgroundColor: "#fff",
     },
     [theme.breakpoints.down("sm")]: {
       marginBottom: theme.spacing(1),
-      width: 80
-    }
+      width: 80,
+    },
   },
   h5: {
     marginBottom: theme.spacing(4),
     marginTop: theme.spacing(4),
     [theme.breakpoints.up("sm")]: {
-      marginTop: theme.spacing(10)
-    }
+      marginTop: theme.spacing(10),
+    },
   },
   more: {
-    marginTop: theme.spacing(2)
+    marginTop: theme.spacing(2),
   },
   title: {
     fontSize: 100,
@@ -51,8 +51,8 @@ const styles = theme => ({
     marginTop: theme.spacing(2),
     [theme.breakpoints.down("sm")]: {
       marginTop: theme.spacing(1),
-      fontSize: 30
-    }
+      fontSize: 30,
+    },
   },
   welcomeTitle: {
     fontSize: 100,
@@ -61,8 +61,8 @@ const styles = theme => ({
     [theme.breakpoints.down("xs")]: {
       marginTop: theme.spacing(10),
       marginBottom: 0,
-      fontSize: 30
-    }
+      fontSize: 30,
+    },
   },
   bottomHeader: {
     display: "flex",
@@ -70,12 +70,12 @@ const styles = theme => ({
     alignItems: "center",
     textAlign: "center",
     [theme.breakpoints.down("sm")]: {
-      justifyContent: "center"
-    }
-  }
+      justifyContent: "center",
+    },
+  },
 });
 
-const Hero = props => {
+const Hero = (props) => {
   const { classes } = props;
   return (
     <React.Fragment>
@@ -98,11 +98,27 @@ const Hero = props => {
         <div className={classes.bottomHeader}>
           <Grid container spacing={1}>
             <Grid item xs={12} sm={6}>
-              <ModalRev
+              {/* <ModalRev
                 name="Book A Table"
                 class={classes.button}
                 other='size="large" color="secondary" variant="contained" component="a"'
-              />
+              /> */}
+              <Button
+                color="secondary"
+                variant="contained"
+                size="large"
+                className={classes.button}
+                component="a"
+                onClick={() =>
+                  window.open(
+                    `https://thaivintagewhitchurch.setmore.com`,
+                    "Popup",
+                    "location,status,scrollbars,resizable,width=600, height=600"
+                  )
+                }
+              >
+                Take Away
+              </Button>
             </Grid>
             <Grid item xs={12} sm={6}>
               <Button
@@ -137,7 +153,7 @@ const Hero = props => {
 };
 
 Hero.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(Hero);
