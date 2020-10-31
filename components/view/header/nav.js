@@ -16,35 +16,35 @@ import ModalRev from "../../reservation/modalrev";
 
 const logo = "/images/thaivintagewhitchurch-logo.png";
 
-const styles = theme => ({
+const styles = (theme) => ({
   title: {
-    fontSize: 24
+    fontSize: 24,
   },
   placeholder: toolbarStyles(theme).root,
   toolbar: {
     paddingLeft: 0,
     paddingRight: 0,
-    justifyContent: "space-between"
+    justifyContent: "space-between",
   },
   left: {
-    flex: 1
+    flex: 1,
   },
   leftLinkActive: {
-    color: theme.palette.common.white
+    color: theme.palette.common.white,
   },
   right: {
     flex: 1,
     display: "flex",
     justifyContent: "flex-end",
     [theme.breakpoints.down("sm")]: {
-      justifyContent: "center"
-    }
+      justifyContent: "center",
+    },
   },
   leftLink: {
     fontSize: 14,
     color: theme.palette.common.black,
     marginLeft: theme.spacing(2),
-    padding: 5
+    padding: 5,
   },
   rightLink: {
     fontSize: 14,
@@ -55,14 +55,14 @@ const styles = theme => ({
     padding: 5,
     [theme.breakpoints.down("sm")]: {
       fontSize: 10,
-      marginRight: theme.spacing(1)
+      marginRight: theme.spacing(1),
     },
     "&:hover": {
-      backgroundColor: "#ff671f"
-    }
+      backgroundColor: "#ff671f",
+    },
   },
   linkSecondary: {
-    color: theme.palette.secondary.main
+    color: theme.palette.secondary.main,
   },
   menuButton: {},
   imageSrc: {
@@ -70,16 +70,16 @@ const styles = theme => ({
     height: 80,
     [theme.breakpoints.down("sm")]: {
       weight: 100,
-      height: 50
-    }
-  }
+      height: 50,
+    },
+  },
 });
 
-const Nav = props => {
+const Nav = (props) => {
   const { classes } = props;
   const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const handleClick = event => {
+  const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -148,11 +148,27 @@ const Nav = props => {
             />
           </Link>
           <div className={classes.right}>
-            <ModalRev name="Book a Table" class={classes.rightLink} />
+            {/* <ModalRev name="Book a Table" class={classes.rightLink} /> */}
             <Button
               variant="contained"
               size="small"
               className={classes.rightLink}
+              // href="https://thaivintagewhitchurch.setmore.com"
+              onClick={() =>
+                window.open(
+                  `https://thaivintagewhitchurch.setmore.com`,
+                  "Popup",
+                  "location,status,scrollbars,resizable,width=600, height=600"
+                )
+              }
+            >
+              Book a Table
+            </Button>
+            <Button
+              variant="contained"
+              size="small"
+              className={classes.rightLink}
+              href="https://thaivintage.takeawaygenie.com/"
             >
               Take AWAY
             </Button>
@@ -225,7 +241,7 @@ const Nav = props => {
 };
 
 Nav.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(Nav);

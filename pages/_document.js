@@ -41,15 +41,17 @@ export default class MyDocument extends Document {
               `
             }}
           />
-
-          <noscript>
-            <img
+          <noscript
+            dangerouslySetInnerHTML={{
+              __html: `<img
               height="1"
               width="1"
               style="display:none"
               src="https://www.facebook.com/tr?id=1373558856188194&ev=PageView&noscript=1"
-            />
-          </noscript>
+            />`
+            }}
+          />
+
           <script src="https://apis.google.com/js/api.js" />
           <link rel="shortcut icon" href="/favicon.ico" />
           {/* PWA primary color */}

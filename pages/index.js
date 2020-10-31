@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Layout from "../components/layout";
 import Hero from "../components/view/header/hero";
 import Intro from "../components/view/intro/appintro";
@@ -12,6 +12,7 @@ const Home = props => {
         <Intro />
         <Catagory />
       </Layout>
+
       <style jsx>{``}</style>
     </div>
   );

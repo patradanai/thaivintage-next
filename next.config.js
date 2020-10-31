@@ -12,6 +12,7 @@ module.exports = {
     FIREBASE_DATABASE_URL: "https://thaivintagewhitchurch.firebaseio.com",
     FIREBASE_PROJECT_ID: "thaivintagewhitchurch",
     FIREBASE_STORAGE_BUCKET: "thaivintagewhitchurch.appspot.com",
-    FIREBASE_MESSAGE_SENDER_ID: "539053704455"
+    FIREBASE_MESSAGE_SENDER_ID: "539053704455",
+	PORT: "8080"
   }
 };

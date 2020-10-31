@@ -111,6 +111,7 @@ const Hero = props => {
                 size="large"
                 className={classes.button}
                 component="a"
+                href="https://thaivintage.takeawaygenie.com/"
               >
                 Take Away
               </Button>
