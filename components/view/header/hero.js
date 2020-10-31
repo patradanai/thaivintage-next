@@ -117,7 +117,7 @@ const Hero = (props) => {
                   )
                 }
               >
-                Take Away
+                Book a Table
               </Button>
             </Grid>
             <Grid item xs={12} sm={6}>
