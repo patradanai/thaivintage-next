@@ -168,7 +168,7 @@ const Nav = (props) => {
               variant="contained"
               size="small"
               className={classes.rightLink}
-              href="https://thaivintage.takeawaygenie.com/"
+              href="https://thai-vintage-restaurant.square.site/"
             >
               Take AWAY
             </Button>
