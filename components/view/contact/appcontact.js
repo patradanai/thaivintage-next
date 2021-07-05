@@ -76,7 +76,7 @@ const Contact = (props) => {
                   Lunch: Wed - Sunday <br />
                   12.00 pm - 3.00 pm <br />
                   Dinner: Wed - Sunday <br />
-                  5.30 pm - 11.00 pm
+                  5.30 pm - 11.30 pm
                 </pre>
               </Typography>
             </div>
