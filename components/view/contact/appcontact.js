@@ -79,7 +79,7 @@ const Contact = (props) => {
                 <pre>
                   {/* Open 6 days <br /> */}
                   Open : Fri - Sun <br />
-                  12.00 pm - 1.00 pm
+                  12.00 pm - 10.00 pm
                 </pre>
               </Typography>
             </div>
