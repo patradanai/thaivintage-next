@@ -79,7 +79,7 @@ const AppLocation = (props) => {
             >>> Click for Get Direction `Thai Vintage Whitchurch, Old Mill, Park Ave,`
           </a>
         </Typography> */}
-        <div className={classes.mapSrc}>
+        <div className={classes.mapSrc} id='location'>
           {/* <Google
             googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6ZlEgybYqVlX6oFQZ5FulqUlMMnyMqjA"
             loadingElement={<div style={{ height: `100%` }} />}

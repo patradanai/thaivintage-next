@@ -73,13 +73,13 @@ const Contact = (props) => {
               <Typography variant='h5' align='center' className={classes.Text}>
                 <pre>
                   {/* Open 6 days <br /> */}
-                  Open : Tues - Thurs <br />
-                  12.00 pm - 11.00 pm
+                  Open : Tues - Sat <br />
+                  05:00 pm - 10:00 pm
                 </pre>
                 <pre>
                   {/* Open 6 days <br /> */}
-                  Open : Fri - Sun <br />
-                  12.00 pm - 10.00 pm
+                  Open : Sun <br />
+                  04:00 pm - 09:00 pm
                 </pre>
               </Typography>
             </div>
