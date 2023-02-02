@@ -78,11 +78,6 @@ const AppFooter = props => {
               marginTop: 10
             }}
           >
-            <Link href="/login">
-              <a style={{ textDecoration: "none", color: "black" }}>
-                Managed by Patradanai
-              </a>
-            </Link>
           </Grid>
         </Grid>
       </Container>
